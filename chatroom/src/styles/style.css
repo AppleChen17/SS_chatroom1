@@ -1,0 +1,123 @@
+@import url("https://fonts.googleapis.com/css2?family=Lexend+Deca&family=Nunito&display=swap");
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: Lexend Deca;
+  font-weight: normal;
+}
+
+nav {
+  text-decoration: none;
+  display: flex;
+  background-color: rgb(251, 179, 153);
+  justify-content: space-between;
+  box-shadow: rgba(149, 157, 165, 0.5) 0px 3px 10px;
+}
+nav div {
+  margin: auto 0.5rem;
+}
+nav div h1 {
+  font-size: 2.5rem;
+}
+nav .profile-area button {
+  background-color: rgb(251, 179, 153);
+  border: none;
+  width: 150px;
+}
+nav .profile-area button img {
+  width: 35%;
+  margin: 1rem 0.2rem;
+}
+nav .profile-area button .bell {
+  width: 25%;
+}
+nav .profile-area .profile {
+  border: 3px solid blue;
+  text-align: right;
+  font-size: 1.5rem;
+  white-space: nowrap;
+}
+nav .profile-area .profile .drop-item {
+  font-size: 1.2rem;
+  font-family: Lexend Deca;
+  font-weight: normal;
+}
+nav .profile-area #dropdown-basic {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 100%;
+  overflow: visible;
+  white-space: nowrap;
+  border: red solid 3px;
+  font-size: 2.5rem;
+  color: black;
+}
+nav .profile-area #dropdown-basic:hover, nav .profile-area #dropdown-basic:focus, nav .profile-area #dropdown-basic:active {
+  background-color: #f99672;
+}
+nav .profile-area #dropdown-basic img {
+  margin-right: 0.5rem;
+  width: 50px;
+  height: 50px;
+}
+nav .profile-area #dropdown-basic h5 {
+  font-size: 1.25rem;
+  color: black;
+}
+nav .profile-area .profile-area {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  overflow: visible;
+}
+
+.popup-menu {
+  position: absolute;
+  top: 60%;
+  transform: translateY(2rem);
+  background: white;
+  left: 40%;
+  border-radius: 15%;
+  padding: 10px 0;
+  width: 160px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  z-index: 100;
+}
+.popup-menu ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.popup-menu li {
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: all ease 0.2s;
+  font-size: 1.2rem;
+  font-family: Lexend Deca;
+  font-weight: normal;
+}
+.popup-menu li:hover {
+  background-color: rgba(245, 245, 245, 0.6509803922);
+}
+
+.send {
+  width: 25px;
+  height: 25px;
+  display: inline;
+  justify-content: center;
+  align-items: center;
+}
+.send img {
+  width: 80%;
+  height: auto;
+}/*# sourceMappingURL=style.css.map */
