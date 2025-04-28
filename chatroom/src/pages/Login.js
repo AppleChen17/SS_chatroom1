@@ -6,7 +6,6 @@ import {
   GoogleAuthProvider,
   signInWithPopup,
 } from "firebase/auth";
-import { addUser } from "../DBfunc"
 // useNavigate is "hook" => ask "navigate" function from it ! (router-dom並沒有把 navigate export，必須用 useNavigate 這個 hook 去獲取！!!)
 import { useNavigate } from "react-router-dom";
 // import "./Login.css"; => 因為 REACT 中的 css 是全域性的，所以在這裡 login 也會跟著影響其他部分 !!
@@ -28,7 +27,7 @@ const Login = () => {
     const handleSignin = (email,password) => {
         console.log("sign in !");
         console.log(email, password);
-        addUser(email);
+
         signInWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
             // Signed in    
@@ -60,7 +59,7 @@ const Login = () => {
             create_alert("success", "Account created successfully!");
             setEmail("");
             setPassword("");
-            await addUser(email);
+
             navigate("/chatroom");
         })
         .catch((error) => {
@@ -78,7 +77,7 @@ const Login = () => {
             create_alert("success", "Google signed in successfully!");
             setEmail("");
             setPassword("");
-            await addUser(userCredential.user.email);
+
             navigate("/chatroom");
         })
         .catch((error) => {

@@ -1,5 +1,7 @@
+// 覺得以 chatroom 為主儲存在 database 的方式會比較清楚 ! => 所以調整一下 !
+
 import { database } from "./config"; // 從 config.js 導入 auth
-import { get, ref, set, update} from "firebase/database";
+import { get, push, ref, set, update} from "firebase/database";
 
 const isValidChar = (char) => {
     const code = char.charCodeAt(0);
@@ -39,132 +41,39 @@ const checkUserExists = async (email) => {
     }
 }
 
-// const checkChatroomExists = async (name) => {
-//     console.log("check chatroom exists !",name);
-
-// }
-
-
-const addUser = async (email) => {
-    const exists = await checkUserExists(email);
-    // have already !
-    if (exists) return; 
-
-    console.log("add user !", email);
-    const ENemail = encodeEmail(email);
-    // 以 email 為主 key ，創建新資料 (因為是獨一無二的 !!!)
-    const userRef = ref(database, `users/${ENemail}`);
-    await set(userRef, {
-        email: email,
-        chatrooms: [0],
-    });
-
-    await addChatroom("General"); // add a default chatroom for the user !
-    await init_Chatroom(email); // add user to the default chatroom !
-    console.log("add user to chatroom 0 !", email);
-}
-
-const init_Chatroom = async (email) => {
-    console.log("init chatroom!", email);
-    const ENemail = encodeEmail(email);
-    const roomRef = ref(database, `Chatroom/0/Members`);
-    await update(roomRef, {
-        [ENemail]: true 
-    });
-};
 
 // create a brand new chatroom with NO users !!!
-const addChatroom = async (name) => {
-    try {
-        const chatroomsRef = ref(database, "Chatroom");
-        const snapshot = await get(chatroomsRef);
-        const chatrooms = snapshot.val() || {};
-        const chatroomIds = Object.keys(chatrooms);
+// need time => async !! (寫過不等的但是因為其他執行太快所以會有問題，等資料回來的時候function已經執行完)
+const createChatroom = async (name) => {
+    const chatroomRef = ref(database,`chatrooms`);
+    // by this way (push!!!!!) => a UNIQUE KEY will be generated for each chatroom ! => easier to identify!
+    const newroomRef = push(chatroomRef);
 
-        const exists = chatroomIds.some((id) => chatrooms[id].name === name);
-        if (exists) {
-            console.log("Chatroom already exists:", name);
-            return;
-        }
-
-        // add new one!
-        const newChatroomId = chatroomIds.length; // number of the chatrooms => ID !
-        const roomRef = ref(database, `Chatroom/${newChatroomId}`);
-        await set(roomRef, {
-            name: name,
-        });
-        console.log("add Chatroom", newChatroomId);
-    } 
-    catch (error) {
-        console.error("Error adding chatroom:", error);
-    }
-};
-
-const addUserToChatroom = async (email,name) => {
-    const chatroomsRef = ref(database, "Chatroom");
-    const snapshot = await get(chatroomsRef);
-    const chatrooms = snapshot.val() || {};
-    const chatroomId = Object.keys(chatrooms);
-
-    let id;
-    for (let i = 0; i < chatroomId.length; i++) {
-        if (chatrooms[chatroomId[i]].name === name) {
-            id = chatroomId[i];
-            break;
-        }
-    }
-
-    const ENemail = encodeEmail(email);
-    // console.log("now chatroom num ", chatroomId.length);
-    const roomMemRef = ref(database, `Chatroom/${id}/Members`);
-    const snapshot2 = await get(roomMemRef);
-    console.log("roomMembers",snapshot2.val());
-    await update(roomMemRef, {
-        [ENemail]: true  // 或其他你想保存的值
+    // 可以再為了可 access 的人 => chatrooms/UNIQUEid/members
+    await set(newroomRef, {
+        name: name,
+        Members: {}, // use [EMAIL] = true !
     });
 
-    const userRef = ref(database, "users/" + ENemail + "/chatrooms");
-    const snapshot3 = await get(userRef);
-    // const chatroomsArray = snapshot3.val() || [];
-    console.log(`${ENemail} added to chatroom ${id}`);
+    // CONTINUE USE THE UNIQUE KEY to add members !
+    console.log("Chatroom created:", newroomRef.key);
+    return newroomRef.key; // IMPORTANT !!!!! 把這個聊天室的 ID 傳回來 !!!
+};
+
+const addUserToChatroom = async (roomID, email) => {
+    const roomMemRef = ref(database, `chatrooms/${roomID}/members`);
+    await update(roomMemRef, {
+        [encodeEmail(email)]: true, // use [EMAIL] = true !
+        // 使用 true/false => 不會重複加到同一個人的問題 ! (反正就是一職 true!)
+    });
+
+    // /name 的方式不一定代表 folder, 可以是其中的一個 小節點 !!!!
+    const roomNameRef = ref(database, `Chatroom/${roomID}/name`);
+    const snapshot = await get(roomNameRef);
+    const roomName = snapshot.exists() ? snapshot.val() : "(unknown)";
+
+    console.log(`User ${email} added to chatroom ${roomName}`);
 }
 
-const getUserChatrooms = async (email) => {
-    const ENemail = encodeEmail(email);
-    const userRef = ref(database, `users/${ENemail}/chatrooms`);
-    try {
-        const snapshot = await get(userRef);
-        if (snapshot.exists()) {
-            console.log("User chatrooms:", snapshot.val());
-            return snapshot.val(); // return "chatrooms" array !!!
-        } else {
-            console.log("No chatrooms found");
-            return [];
-        }
-    } catch (error) {
-        console.error("Error fetching chatrooms:", error);
-        return [];
-    }
-};
-
-const getChatroomNameById = async (chatroomId) => {
-    const chatroomRef = ref(database, `Chatroom/${chatroomId}`);
-    try {
-        const snapshot = await get(chatroomRef);
-        if (snapshot.exists()) {
-            console.log(`Chatroom ${chatroomId} data:`, snapshot.val());
-            return snapshot.val(); // 返回該聊天室的資料
-        } 
-        else {
-            console.log(`Chatroom ${chatroomId} does not exist.`);
-            return null;
-        }
-    } 
-    catch (error) {
-        console.error(`Error fetching chatroom ${chatroomId}:`, error);
-        return null;
-    }
-};
-
-export { addUser, addChatroom, addUserToChatroom,getUserChatrooms,getChatroomNameById };
+export { createChatroom, addUserToChatroom, encodeEmail};
 export default checkUserExists;

@@ -1,111 +1,126 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect} from 'react';
 import { auth,database } from "../config";
-import { getUserChatrooms,getChatroomNameById } from "../DBfunc";
+import { createChatroom,addUserToChatroom,encodeEmail } from "../DBfunc";
 import { ref,onValue } from "firebase/database";
 
 // 對某個使用者而言，目前可以 access 到的 chatroom list !
-// hint: 要用 onVal => 可以處理即時更新的資料庫資料 (firebase database) !
+// hint: 要用 onValue => 可以處理即時更新的資料庫資料 (firebase database) !
 const RoomList = () => {
-    const [rooms, setRooms] = useState([]); // 存儲聊天室 ID
-    const [roomNames, setRoomNames] = useState([]); // 存儲聊天室名稱
+    //     const room = [
+    //     { id: 1, name: 'General' },
+    //     { id: 2, name: 'Technology' },
+    //     { id: 3, name: 'Sports' },
+    // ];
+    const [rooms, setRooms] = useState([]); // 存儲聊天室列表
+    const [showInput, setShowInput] = useState(false); 
+    const [showInvite, setShowInvite] = useState(false); 
+    const [newRoomName, setNewRoomName] = useState(""); 
+    const [newInviteEmail, setNewInviteEmail] = useState(""); 
 
-    // 獲取聊天室名稱的函數
-    const getRoomNames = useCallback(async () => {
-        const roomNames = await Promise.all(
-            rooms.map(async (r) => {
-                const chatroomName = await getChatroomNameById(r);
-                return chatroomName.name;
-            })
-        );
-        return roomNames;
-    }, [rooms]);
-
-    // 獲取聊天室 ID
+    // 渲染 UI 以外的事情 !
     useEffect(() => {
-        const getRooms = async () => {
-            const email = auth.currentUser.email;
-            try {
-                const fetchedRooms = await getUserChatrooms(email);
-                setRooms(fetchedRooms); // 更新聊天室 ID
-            } catch (error) {
-                console.error("Error fetching chatrooms:", error);
-            }
-        };
+        const roomsRef = ref(database, "chatrooms");
 
-        getRooms();
-    }, []);
-
-    // 即時監聽聊天室變化
-    useEffect(() => {
-        const chatroomsRef = ref(database, "Chatroom");
-        const unsubscribe = onValue(chatroomsRef, (snapshot) => {
+        // 會即時監控但是也會回傳一個 "停止監控" 的 function !
+        // onValue would update !! (callback 來執行)
+        const unsubscribe = onValue(roomsRef, (snapshot) => {
             const chatrooms = snapshot.val() || {};
-            const roomIds = Object.keys(chatrooms);
-            const roomNames = roomIds.map((id) => chatrooms[id].name);
-
-            setRooms(roomIds); // 更新聊天室 ID
-            setRoomNames(roomNames); // 更新聊天室名稱
+            const roomList = Object.entries(chatrooms).map(([id, data]) => ({
+                id,
+                name: data.name,
+                members: data.members ? Object.keys(data.members) : [], // => array
+            }));
+    
+            console.log("RoomList update = ", roomList);
+            setRooms(roomList);
         });
 
-        // 清理監聽器
+        // cleanup function
+        // may cause memory leak => when ROOMLIST is closed, it is trying to observe a 
+        // unexisting object and sending back the result
         return () => unsubscribe();
-    }, []);
+    }, []); 
 
-    // 獲取聊天室名稱
     useEffect(() => {
-        if (rooms.length > 0) {
-            getRoomNames().then((names) => {
-                console.log("Chatroom Names:", names);
-                setRoomNames(names); // 更新聊天室名稱
-            });
-        }
-    }, [rooms, getRoomNames]);
+        console.log("Rooms update = ", rooms);
+    }, [rooms]); // dependency is [rooms] array ! => if change then output
 
-    // 渲染聊天室名稱
+    const createRoom = async (name) => {
+        try {
+            const roomID = await createChatroom(name); 
+            await addUserToChatroom(roomID, auth.currentUser.email); // 將當前用戶添加到聊天室
+            setShowInput(false);
+            setNewRoomName("");
+        } 
+        catch (error) {
+            console.error("Create chatroom ERROR:", error);
+        }
+    };
+
+
+    const [selectedRoomId, setSelectedRoomId] = useState(null);// for the selected room id 
+
+    const handleRoomClick = (id) => {
+        console.log("roomid = ", id);
+        setSelectedRoomId(id);
+    };
+
     return (
         <div>
-            {roomNames.length > 0 ? (
-                roomNames.map((name, index) => (
-                    <div key={index} className="room-list-item">
-                        <h2>{name}</h2>
-                    </div>
-                ))
-            ) : (
-                <p>Loading chatrooms...</p>
+            <button onClick={() => setShowInput(true)}>Add Chatroom</button>
+
+            {/* 顯示輸入框 */}
+            {showInput && (
+                <div>
+                    <input
+                        type="text"
+                        placeholder="Enter chatroom name"
+                        value={newRoomName}
+                        onChange={(e) => setNewRoomName(e.target.value)}
+                    />
+                    <button onClick={async () => createRoom(newRoomName)}>Create</button>
+                    <button onClick={() => setShowInput(false)}>Cancel</button>
+                </div>
             )}
+            <button onClick={() => setShowInvite(true)}>Invite user</button>
+
+            {/* 顯示輸入框 */}
+            {selectedRoomId && showInvite && (
+                <div>
+                    <input
+                        type="email"
+                        placeholder="Enter email to invite"
+                        value={newInviteEmail}
+                        onChange={(e) => setNewInviteEmail(e.target.value)}
+                    />
+                    <button onClick={() => addUserToChatroom(selectedRoomId,newInviteEmail)}>Invite</button>
+                    <button onClick={() => setShowInvite(false)}>Cancel</button>
+                </div>
+            )}
+
+            {/* render list */}
+            <div>
+                {/* {rooms.map((room) => (
+                    <button key={room.id} className="room-list-item" onClick={() => handleRoomClick(room.id)}>
+                        <h2>{room.name}</h2>
+                    </button>
+                ))} */}
+
+                {rooms.filter((room) => room.members.includes(encodeEmail(auth.currentUser.email)))
+                    .map((room) => (
+                        <button
+                            key={room.id}
+                            className="room-list-item"
+                            // !!! IMPORTANT !!! 把這個 onclick 掛在這裡可以取得他的 room.id!!!!!!
+                            onClick={() => handleRoomClick(room.id)}
+                        >
+                            <h2>{room.name}</h2>
+                        </button>
+        ))}
+            </div>
         </div>
     );
 };
-// const RoomList = () => {
-
-//     // const room = [
-//     //     { id: 1, name: 'General' },
-//     //     { id: 2, name: 'Technology' },
-//     //     { id: 3, name: 'Sports' },
-//     // ];
-
-//     const [rooms, setRooms] = useState([]);
-
-//     useEffect(() => {
-//         const getRooms = async () => {
-//             const email = auth.currentUser.email;
-//             try {
-//                 const fetchedRooms = await getUserChatrooms(email); // 等待非同步操作完成
-//                 setRooms(fetchedRooms); // 更新狀態
-//             } catch (error) {
-//                 console.error("Error fetching chatrooms:", error);
-//             }
-//         };
-
-//         getRooms();
-//     }, []);
-
-//     rooms.map(async (r) => {
-//         const chatroomName = await getChatroomNameById(r); // 獲取聊天室名稱
-//         console.log("chatroomName", chatroomName.name); // 確認名稱是否正確
-//         console.log("r",r); // 確認聊天室 ID 是否正確
-//         return <h3 key={r}>{chatroomName.name}</h3>; // 使用 key 屬性
-//     });
 
 // };
     // return (
