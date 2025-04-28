@@ -1,9 +1,26 @@
 import React, { useState, useEffect } from 'react';
+import RoomList from '../components/RoomList';
+import { addChatroom, addUserToChatroom } from '../DBfunc';
+import { auth,database } from "../config";
 
 const Chatroom = () => {
+    // const oom = [
+    //     { id: 1, name: 'General' },
+    //     { id: 2, name: 'Technology' },
+    //     { id: 3, name: 'Sports' },
+    // ];
+
+    const handleAdd = async (name) => {
+        const email = auth.currentUser.email;
+        await addChatroom(name);
+        await addUserToChatroom(email,name);
+    }
     return (
         <>
         <h1>Chatroom</h1>
+        <RoomList/>
+        <h1>ChatroomList</h1>
+        <button onClick={() => handleAdd("Number")}>Join</button>
         </>
     );
     // const [messages, setMessages] = useState([]);
