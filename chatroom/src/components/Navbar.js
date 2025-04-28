@@ -3,6 +3,7 @@ import React from 'react';
 import Dropdown from 'react-bootstrap/Dropdown';
 import { useNavigate } from 'react-router-dom';
 import '../styles/style.css';
+import {auth} from "../config";
 
 
 const Navbar = () => {
@@ -10,7 +11,26 @@ const Navbar = () => {
   // // can catch DOM value !!
   // const menuRef = useRef();
   const navigate = useNavigate();
-  const user = "128362786349827423896yhello@gmail.com";
+  const user = auth.currentUser ? auth.currentUser.email : 'Guest';
+
+  const create_alert = (type, message) => {
+    console.log("create alert !",type,message);
+    alert(`${type}: ${message}`);
+  };
+
+  const handleLogout = () => {
+    auth.signOut()
+    .then(() => {
+      // root is login
+      console.log("Logout successfully!");
+      create_alert("success", "Logout successfully!");
+      navigate('/');
+    })
+    .catch((error) => {
+      // An error happened.
+      console.error("Logout failed:", error.message);
+    });
+  }
   // const toggleMenu = () => {
   //   setOpenMenu(!Menu);
   // };
@@ -50,25 +70,29 @@ const Navbar = () => {
         <Dropdown.Toggle id="dropdown-basic">
           {/*  variant="success" => 原本上面好像會造成綠色背景的 toggle 特效 */}
           <img src="/user-3296.svg" alt="photo" />
-          {/* <img src="../../public/user-3296.svg" alt="user" /> */}
-          <h5>{user}</h5>
+          <h4>{user}</h4>
         </Dropdown.Toggle>
 
         <Dropdown.Menu >
         <Dropdown.Item
           className="drop-item"
-          onClick={() => navigate('/')} // 跳轉到 /profile
+          onClick={() => navigate('/chatroom')}
         >
           Home
         </Dropdown.Item>
         <Dropdown.Item
           className="drop-item"
-          onClick={() => navigate('/profile')} // 跳轉到 /profile
+          onClick={() => navigate('/profile')} 
         >
           View Profile
         </Dropdown.Item>
 
-          <Dropdown.Item className = "drop-item">Logout</Dropdown.Item>
+          <Dropdown.Item 
+            className = "drop-item"
+            onClick={handleLogout} 
+          >
+            Logout
+          </Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown>
 
