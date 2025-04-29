@@ -200,7 +200,7 @@ const RoomList = () => {
                             // !!! IMPORTANT !!! 把這個 onclick 掛在這裡可以取得他的 room.id!!!!!!
                             onClick={() => handleRoomClick(room.id)}
                         >
-                            <h2>{room.name}</h2>
+                            <h4>{room.name}</h4>
                         </button>
                     ))}
             </div>

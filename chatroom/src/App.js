@@ -39,17 +39,21 @@ function App() {
   if (loading) return <div>Loading...</div>;
 
   return (
-    <>
-      {location.pathname !== "/" && <Navbar />}
+    <div className="App" style={{ height: '100dvh', display: 'flex', flexDirection: 'column' }}>
+      {/* {location.pathname !== "/" && <Navbar />} */}
 
-      <Routes>
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/chatroom" element={<Chatroom />} />
-        <Route path="/chatinput" element={<ChatInput />} />
-        <Route path="/roomlist" element={<RoomList />} />
-        <Route path="/" element={<Login />} />
-      </Routes>
-    </>
+      <div>
+        {/* <Navbar /> */}
+        <Routes>
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/chatroom" element={<Chatroom />} />
+          <Route path="/chatinput" element={<ChatInput />} />
+          <Route path="/roomlist" element={<RoomList />} />
+          <Route path="/" element={<Login />} />
+        </Routes>
+      </div>
+
+    </div>
   );
 }
 

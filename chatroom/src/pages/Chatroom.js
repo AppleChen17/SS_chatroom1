@@ -3,6 +3,7 @@ import RoomList from '../components/RoomList';
 import { createChatroom, addUserToChatroom } from '../DBfunc';
 import { auth,database } from "../config";
 import ChatInput from '../components/ChatInput';
+import Navbar from '../components/Navbar';
 
 const Chatroom = () => {
     // const oom = [
@@ -12,19 +13,25 @@ const Chatroom = () => {
     // ];
 
     return (
-        <div className='Chatroom'>
+        // 靠著 flex 來控制解決了 ! 好像是因為像 Navbar 這種 component 的空間是不計算在裡面的，所以那樣條不行
+        // 啊這樣設成 flex 讓底下自己解決就可以了 !
+        <div style={{ display: 'flex', flexDirection: 'column', height: '100vh' }}>
             {/* here need to do "flex" ! (正常情況 -> 左右 | RWD -> 上下排列) */}
-            <div className='List'>
-                <h1>Chatroom</h1>
-                <RoomList/>
-            </div>
+            <Navbar/>
 
-            <div className='Chat'>
-                {/* 之後可以放 這個 chatroom 的名字 ! */}
-                <h1>Chat</h1>
-                <ChatInput/>
+            <div className="Chatroom" style={{ display: 'flex', flex: 1 }}>
+                <div className='List'>
+                    <h2>Chatroom List</h2>
+                    <RoomList/>
+                </div>
+
+                <div className='Chat'>
+                    {/* 之後可以放 這個 chatroom 的名字 ! */}
+                    <h2>Chat</h2>
+                    <ChatInput/>
+                </div>
+                {/* <button onClick={() => createChatroom()}>Create Chatroom</button> */}
             </div>
-            {/* <button onClick={() => createChatroom()}>Create Chatroom</button> */}
         </div>
     );
     // const [messages, setMessages] = useState([]);

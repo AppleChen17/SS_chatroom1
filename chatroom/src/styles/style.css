@@ -20,6 +20,7 @@ nav {
   display: flex;
   background-color: rgb(251, 179, 153);
   justify-content: space-between;
+  height: 100px;
   box-shadow: rgba(149, 157, 165, 0.5) 0px 3px 10px;
 }
 nav div {
@@ -147,6 +148,19 @@ nav .profile-area .profile-area {
   background-color: antiquewhite;
 }
 
-.ChatRoom {
+.Chatroom {
   display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  height: 100dvh;
+}
+
+.List {
+  border: 3px blue solid;
+  flex: 1 1 500px;
+}
+
+.Chat {
+  border: 3px red solid;
+  flex: 5 1 600px;
 }/*# sourceMappingURL=style.css.map */
