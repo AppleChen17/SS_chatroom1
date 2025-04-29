@@ -12,20 +12,20 @@ const Chatroom = () => {
     // ];
 
     return (
-        <>
-        {/* here need to do "flex" ! (正常情況 -> 左右 | RWD -> 上下排列) */}
-        <div className='List'>
-            <h1>Chatroom</h1>
-            <RoomList/>
-        </div>
+        <div className='Chatroom'>
+            {/* here need to do "flex" ! (正常情況 -> 左右 | RWD -> 上下排列) */}
+            <div className='List'>
+                <h1>Chatroom</h1>
+                <RoomList/>
+            </div>
 
-        <div className='Chat'>
-            {/* 之後可以放 這個 chatroom 的名字 ! */}
-            <h1>Chat</h1>
-            <ChatInput/>
+            <div className='Chat'>
+                {/* 之後可以放 這個 chatroom 的名字 ! */}
+                <h1>Chat</h1>
+                <ChatInput/>
+            </div>
+            {/* <button onClick={() => createChatroom()}>Create Chatroom</button> */}
         </div>
-        {/* <button onClick={() => createChatroom()}>Create Chatroom</button> */}
-        </>
     );
     // const [messages, setMessages] = useState([]);
     // const [input, setInput] = useState('');

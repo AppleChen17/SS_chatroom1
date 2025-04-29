@@ -145,4 +145,8 @@ nav .profile-area .profile-area {
 
 .RoomList {
   background-color: antiquewhite;
+}
+
+.ChatRoom {
+  display: flex;
 }/*# sourceMappingURL=style.css.map */
