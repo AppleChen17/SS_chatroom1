@@ -79,7 +79,7 @@ const Login = () => {
             create_alert("success", "Google signed in successfully!");
             setEmail("");
             setPassword("");
-            await createUser(email);
+            await createUser(auth.currentUser.email);
             navigate("/chatroom");
         })
         .catch((error) => {
