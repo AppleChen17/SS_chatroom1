@@ -46,6 +46,21 @@ const Login = () => {
         alert(`${type}: ${message}`);
     };
 
+    const requestPermission = () => {
+        if (Notification.permission === "default") {
+            Notification.requestPermission().then(permission => {
+                if (permission === "granted") console.log("granted!");
+                else console.log("denied!");
+            });
+        } 
+        else if (Notification.permission === "granted") {
+            console.log("Permission already granted");
+        }
+    };
+
+    const create_chromenotification = () => {
+
+    }
     // SIGNIN
     const handleSignin = (email,password) => {
         console.log("sign in !");
@@ -134,6 +149,9 @@ const Login = () => {
                 }}
             >
                 <h1>Login</h1>
+                <button>
+                    <img className='bell' src="/bell-solid.svg" alt="notification" />
+                </button>
                 <h4>Please enter your credentials to log in.</h4>
 
                 <label htmlFor="inputEmail" 

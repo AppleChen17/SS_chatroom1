@@ -91,8 +91,8 @@ const RoomList = () => {
                         style={{ margin: "10px 10px", 
                             width:"150px", 
                             height: "50px", 
-                            backgroundColor: "#4CAF50", 
-                            color: "white", 
+                            backgroundColor: "#FAEBD7", 
+                            color: "black", 
                             borderRadius: "5px", 
                             border: "none", 
                             cursor: "pointer",
@@ -116,16 +116,16 @@ const RoomList = () => {
                             />
                             <button 
                                 onClick={async () => handleCreateRoom(newRoomName)}
-                                style={{backgroundColor:"#4a964a",padding:"2px 5px",margin:"2px 2px",
-                                    color:"#ffffff", borderRadius:"10px",
+                                style={{backgroundColor:"#F4D4AA",padding:"2px 5px",margin:"2px 2px",
+                                    borderRadius:"10px", border:"none",
                                 }}
                             >
                                     Create
                             </button>
                             <button 
                                 onClick={() => setShowInput(false)}
-                                style={{backgroundColor:"#4a964a",padding:"2px 5px",margin:"2px 2px",
-                                    color:"#ffffff", borderRadius:"10px",}}
+                                style={{backgroundColor:"#F4D4AA",padding:"2px 5px",margin:"2px 2px",
+                                     borderRadius:"10px", border:"none",}}
                             >
                                 Cancel
                             </button>
@@ -141,8 +141,8 @@ const RoomList = () => {
                         style={{ margin: "10px 10px", 
                             width:"150px", 
                             height: "50px", 
-                            backgroundColor: "#4CAF50", 
-                            color: "white", 
+                            backgroundColor: "#FAEBD7", 
+                            color: "black", 
                             borderRadius: "5px", 
                             border: "none", 
                             cursor: "pointer",
@@ -164,16 +164,16 @@ const RoomList = () => {
                             />
                             <button 
                                 onClick={() => addUserToChatroom(selectedRoomId,newInviteEmail)}
-                                style={{backgroundColor:"#4a964a",padding:"2px 5px",margin:"2px 2px",
-                                    color:"#ffffff", borderRadius:"10px",}}
+                                style={{backgroundColor:"#F4D4AA",padding:"2px 5px",margin:"2px 2px",
+                                    borderRadius:"10px", border:"none",}}
                             >
                                 Invite
                             </button>
 
                             <button 
                                 onClick={() => setShowInvite(false)}
-                                style={{backgroundColor:"#4a964a",padding:"2px 5px",margin:"2px 2px",
-                                    color:"#ffffff", borderRadius:"10px",}}
+                                style={{backgroundColor:"#F4D4AA",padding:"2px 5px",margin:"2px 2px",
+                                    borderRadius:"10px", border:"none",}}
                             >
                                     Cancel
                             </button>

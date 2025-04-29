@@ -15,6 +15,14 @@ h6 {
   font-weight: normal;
 }
 
+.bell {
+  width: 100px;
+  height: 100px;
+}
+.bell:hover {
+  width: 110%;
+}
+
 nav {
   text-decoration: none;
   display: flex;
@@ -29,6 +37,10 @@ nav div {
 nav div h1 {
   font-size: 2.5rem;
 }
+nav .profile-area {
+  display: flex;
+  flex-direction: row;
+}
 nav .profile-area button {
   background-color: rgb(251, 179, 153);
   border: none;
@@ -37,9 +49,6 @@ nav .profile-area button {
 nav .profile-area button img {
   width: 35%;
   margin: 1rem 0.2rem;
-}
-nav .profile-area button .bell {
-  width: 25%;
 }
 nav .profile-area .profile {
   text-align: right;
@@ -149,17 +158,6 @@ nav .profile-area .profile-area {
   height: 100dvh;
 }
 
-.List {
-  border: 3px blue solid;
-  flex: 1 1 500px;
-}
-
-.Chat {
-  border: 3px red solid;
-  flex: 5 1 600px;
-}
-
-/* Container for chat messages */
 .chat-container {
   display: flex;
   flex-direction: column;
@@ -204,11 +202,12 @@ nav .profile-area .profile-area {
   padding: 10px;
   border-radius: 20px;
   border: 1px solid #ccc;
+  margin-right: 5px;
 }
 .input-msg button {
   padding: 10px 15px;
   border: none;
-  background-color: #007bff;
+  background-color: #b4d6fa;
   color: white;
 }
 
@@ -216,22 +215,19 @@ nav .profile-area .profile-area {
   overflow-y: hidden;
 }
 
-/* Ensure full viewport height */
 .chatroom-container {
   display: flex;
   flex-direction: column;
   height: 100vh;
 }
 
-/* Main body splits horizontally (desktop) or vertically (mobile) */
 .chatroom {
   display: flex;
   flex: 1;
   flex-direction: row;
 }
 
-/* Sidebar */
-.chatroom-sidebar {
+.chatroom-list {
   width: 350px;
   min-width: 180px;
   display: flex;
@@ -267,7 +263,7 @@ nav .profile-area .profile-area {
   .chatroom-body {
     flex-direction: column;
   }
-  .chatroom-sidebar {
+  .chatroom-list {
     width: 50%;
     min-height: 200px;
     border-bottom: 1px solid #ccc;

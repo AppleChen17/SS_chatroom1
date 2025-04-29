@@ -6,6 +6,9 @@ import { createMessage } from '../DBfunc';
 import { useRoom } from '../RoomContext'; // useRoom => get the room id ! (is a HOOK !!!)
 import { auth } from '../config'; 
 import { loadMessage } from '../DBfunc';
+import ReactDOM from 'react-dom'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPaperPlane } from '@fortawesome/free-solid-svg-icons' // import icon from fontawesome
 
 const ChatInput = () => {
     const { selectedRoomId } = useRoom();
@@ -65,7 +68,9 @@ const ChatInput = () => {
             placeholder="Type a message : D"
           />
           <button type="button" className="btn btn-primary" onClick={handleSend}>
-            <i className="bi bi-send-fill"></i>Send
+            {/* <i className="bi bi-send-fill"></i>Send */}
+            <img className='send' src="/paper-plane-regular.svg" alt="send"  />
+            {/* <FontAwesomeIcon icon="fa-solid fa-paper-plane" /> */}
           </button>
         </div>
       </div>

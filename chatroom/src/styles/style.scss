@@ -19,6 +19,20 @@ h6 {
 	font-weight: normal;
 }
 
+.bell {
+width: 100px;
+height: 100px;
+// width: 25%;
+  &:hover {
+    // background-color: darken($themeColor, 8%);
+    // width: 30%;
+    width: 110%;
+    // h5 {
+    //     color: white;
+    // }
+  }
+}
+
 nav {
     text-decoration: none;
     display: flex;
@@ -42,7 +56,8 @@ nav {
         // justify-content: flex-end;
         // border: 3px solid red;
         // position: relative;
-        // display:flex;
+        display:flex;
+        flex-direction: row;
 
         button{
             background-color: $themeColor;
@@ -54,9 +69,7 @@ nav {
                 // height: 80%;
                 margin: 1rem 0.2rem;
             }
-            .bell {
-                width: 25%;
-            }
+
         }
 
         .profile {
@@ -170,7 +183,7 @@ nav {
 // .funct-btns {
 //     display: flex;
 //     flex-direction: column;
-//     color: red; /* 加一個明顯的測試色 */
+//     color: red;
 //     .func-btn {
 //         display: block;
 //         margin: 10px 10px;
@@ -212,19 +225,18 @@ nav {
     height: 100dvh;
 }
 
-.List {
-    border: 3px blue solid;
-    flex: 1 1 500px;
-    // max-width: 650px;
-    // height: 100dvh;
-}
-.Chat {
-    border: 3px red solid;
-    flex: 5 1 600px;
-    // max-width: 650px;
-}
+// .List {
+//     // border: 3px blue solid;
+//     flex: 1 1 500px;
+//     // max-width: 650px;
+//     // height: 100dvh;
+// }
+// .Chat {
+//     // border: 3px red solid;
+//     flex: 5 1 600px;
+//     // max-width: 650px;
+// }
 
-/* Container for chat messages */
 .chat-container {
     display: flex;
     flex-direction: column;
@@ -265,19 +277,20 @@ nav {
     display: flex;
     align-items: center;
     justify-content: center;
-    // gap: 10px;
     margin-top: 5px;
+
     input {
       width: 80%;
       padding: 10px;
       border-radius: 20px;
       border: 1px solid #ccc;
+      margin-right: 5px;
     }
   
     button {
       padding: 10px 15px;
       border: none;
-      background-color: #007bff;
+      background-color: #b4d6fa;
       color: white;
     }
   }
@@ -286,14 +299,12 @@ nav {
     overflow-y: hidden;
   }
 
-  /* Ensure full viewport height */
 .chatroom-container {
     display: flex;
     flex-direction: column;
     height: 100vh;
   }
   
-  /* Main body splits horizontally (desktop) or vertically (mobile) */
   .chatroom {
     display: flex;
     flex: 1;
@@ -301,8 +312,7 @@ nav {
     flex-direction: row;
   }
   
-  /* Sidebar */
-  .chatroom-sidebar {
+  .chatroom-list {
     width: 350px;
     min-width: 180px;
     display: flex;
@@ -339,7 +349,7 @@ nav {
       flex-direction: column;
     }
   
-    .chatroom-sidebar {
+    .chatroom-list {
       width: 50%;
       min-height: 200px;
     //   border-right: none;

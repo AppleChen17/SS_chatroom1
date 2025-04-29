@@ -40,7 +40,7 @@ const Chatroom = () => {
         <div className="chatroom-container">
             <Navbar />
             <div className="chatroom">
-                <div className="chatroom-sidebar">
+                <div className="chatroom-list">
                 <h2 className="section-header"> Chatroom List </h2>
                 <div className="scrollable">
                     <RoomList />
