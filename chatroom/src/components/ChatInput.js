@@ -22,6 +22,7 @@ const ChatInput = () => {
             if (messages) {
                 setallMessages(messages);
             }
+            else setallMessages([]);
         };
 
         historyMessages();

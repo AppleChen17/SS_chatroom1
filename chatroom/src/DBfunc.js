@@ -96,7 +96,7 @@ const addUserToChatroom = async (roomID, email) => {
     });
 
     // /name 的方式不一定代表 folder, 可以是其中的一個 小節點 !!!!
-    const roomNameRef = ref(database, `Chatroom/${roomID}/name`);
+    const roomNameRef = ref(database, `chatrooms/${roomID}/name`);
     const snapshot = await get(roomNameRef);
     const roomName = snapshot.exists() ? snapshot.val() : "(unknown)";
 

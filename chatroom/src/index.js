@@ -13,14 +13,13 @@ root.render(
   //   {/* <Login/> */}
   // </React.StrictMode>
 
-  // <React.StrictMode>
+  <React.StrictMode>
     <BrowserRouter>
       <RoomProvider>
         <App />
-        {/* <Login /> */}
       </RoomProvider>
     </BrowserRouter>
-  // </React.StrictMode>
+  </React.StrictMode>
 
 );
 
