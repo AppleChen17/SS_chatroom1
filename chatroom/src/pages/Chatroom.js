@@ -12,9 +12,10 @@ const Chatroom = () => {
 
     return (
         <>
-        <h1>Chatroom</h1>
-        <RoomList/>
-        <h1>ChatroomList</h1>
+        <div className='List'>
+            <h1>Chatroom</h1>
+            <RoomList/>
+        </div>
         {/* <button onClick={() => createChatroom()}>Create Chatroom</button> */}
         </>
     );

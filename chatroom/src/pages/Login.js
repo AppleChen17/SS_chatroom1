@@ -8,12 +8,14 @@ import {
 } from "firebase/auth";
 // useNavigate is "hook" => ask "navigate" function from it ! (router-dom並沒有把 navigate export，必須用 useNavigate 這個 hook 去獲取！!!)
 import { useNavigate } from "react-router-dom";
+import { createUser } from "../DBfunc";
 // import "./Login.css"; => 因為 REACT 中的 css 是全域性的，所以在這裡 login 也會跟著影響其他部分 !!
 
 // main function
 const Login = () => {
     const [email, setEmail] = useState(''); //setEmail => change the value of email
     const [password, setPassword] = useState('');
+    // hooker
     const navigate = useNavigate();
 
 
@@ -59,7 +61,7 @@ const Login = () => {
             create_alert("success", "Account created successfully!");
             setEmail("");
             setPassword("");
-
+            await createUser(email);
             navigate("/chatroom");
         })
         .catch((error) => {
@@ -77,7 +79,7 @@ const Login = () => {
             create_alert("success", "Google signed in successfully!");
             setEmail("");
             setPassword("");
-
+            await createUser(email);
             navigate("/chatroom");
         })
         .catch((error) => {

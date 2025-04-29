@@ -49,8 +49,7 @@ const RoomList = () => {
         try {
             const roomID = await createChatroom(name); 
             await addUserToChatroom(roomID, auth.currentUser.email); // 將當前用戶添加到聊天室
-            setShowInput(false);
-            setNewRoomName("");
+
         } 
         catch (error) {
             console.error("Create chatroom ERROR:", error);
@@ -65,41 +64,126 @@ const RoomList = () => {
         setSelectedRoomId(id);
     };
 
+    const handleCreateRoom = async(name) => {
+        setShowInput(false);
+        setNewRoomName("");
+        if(name.trim() === "") {
+            alert("Please enter a valid chatroom name !");
+            return;
+        }
+        await createRoom(newRoomName);
+    }
+
     return (
-        <div>
-            <button onClick={() => setShowInput(true)}>Add Chatroom</button>
-
-            {/* 顯示輸入框 */}
-            {showInput && (
-                <div>
-                    <input
-                        type="text"
-                        placeholder="Enter chatroom name"
-                        value={newRoomName}
-                        onChange={(e) => setNewRoomName(e.target.value)}
-                    />
-                    <button onClick={async () => createRoom(newRoomName)}>Create</button>
-                    <button onClick={() => setShowInput(false)}>Cancel</button>
+        <div className='RoomList'>
+            <div 
+                className='func-btns'
+                style={{ display: "flex", flexDirection: "column"}}
+            >
+                {/* default row flex */}
+                <div
+                    style={{ display: "flex", alignItems:"center", flexWrap: "wrap"}}>
+                    <button 
+                        className='func-btn' 
+                        onClick={() => setShowInput(true)}
+                        style={{ margin: "10px 10px", 
+                            width:"150px", 
+                            height: "50px", 
+                            backgroundColor: "#4CAF50", 
+                            color: "white", 
+                            borderRadius: "5px", 
+                            border: "none", 
+                            cursor: "pointer",
+                            fontSize: "1.2rem"
+                        }}
+                    >
+                            Add Chatroom
+                    </button>
+                    {/* 顯示輸入框 */}
+                    {showInput && (
+                        <div 
+                            className='input-area'
+                            style={{display: "inline"}}
+                        >
+                            <input
+                                type="text"
+                                placeholder="Enter chatroom name"
+                                value={newRoomName}
+                                onChange={(e) => setNewRoomName(e.target.value)}
+                                style={{display: "inline"}}
+                            />
+                            <button 
+                                onClick={async () => handleCreateRoom(newRoomName)}
+                                style={{backgroundColor:"#4a964a",padding:"2px 5px",margin:"2px 2px",
+                                    color:"#ffffff", borderRadius:"10px",
+                                }}
+                            >
+                                    Create
+                            </button>
+                            <button 
+                                onClick={() => setShowInput(false)}
+                                style={{backgroundColor:"#4a964a",padding:"2px 5px",margin:"2px 2px",
+                                    color:"#ffffff", borderRadius:"10px",}}
+                            >
+                                Cancel
+                            </button>
+                        </div>
+                    )}
                 </div>
-            )}
-            <button onClick={() => setShowInvite(true)}>Invite user</button>
 
-            {/* 顯示輸入框 */}
-            {selectedRoomId && showInvite && (
-                <div>
-                    <input
-                        type="email"
-                        placeholder="Enter email to invite"
-                        value={newInviteEmail}
-                        onChange={(e) => setNewInviteEmail(e.target.value)}
-                    />
-                    <button onClick={() => addUserToChatroom(selectedRoomId,newInviteEmail)}>Invite</button>
-                    <button onClick={() => setShowInvite(false)}>Cancel</button>
+
+                <div style={{ display: "flex", alignItems:"center", flexWrap: "wrap"}}>
+                    <button 
+                        className='func-btn' 
+                        onClick={() => setShowInvite(true)}
+                        style={{ margin: "10px 10px", 
+                            width:"150px", 
+                            height: "50px", 
+                            backgroundColor: "#4CAF50", 
+                            color: "white", 
+                            borderRadius: "5px", 
+                            border: "none", 
+                            cursor: "pointer",
+                            fontSize: "1.2rem"
+                        }}
+                    >
+                        Invite user
+                    </button>
+
+                    {/* 顯示輸入框 */}
+                    {selectedRoomId && showInvite && (
+                        <div className='input-area' style={{display: "inline"}}>
+                            <input
+                                type="email"
+                                placeholder="Enter email to invite"
+                                value={newInviteEmail}
+                                onChange={(e) => setNewInviteEmail(e.target.value)}
+                                style={{display: "inline"}}
+                            />
+                            <button 
+                                onClick={() => addUserToChatroom(selectedRoomId,newInviteEmail)}
+                                style={{backgroundColor:"#4a964a",padding:"2px 5px",margin:"2px 2px",
+                                    color:"#ffffff", borderRadius:"10px",}}
+                            >
+                                Invite
+                            </button>
+
+                            <button 
+                                onClick={() => setShowInvite(false)}
+                                style={{backgroundColor:"#4a964a",padding:"2px 5px",margin:"2px 2px",
+                                    color:"#ffffff", borderRadius:"10px",}}
+                            >
+                                    Cancel
+                            </button>
+                        </div>
+                    )}
                 </div>
-            )}
+
+            </div>
+
 
             {/* render list */}
-            <div>
+            <div className="room-list">
                 {/* {rooms.map((room) => (
                     <button key={room.id} className="room-list-item" onClick={() => handleRoomClick(room.id)}>
                         <h2>{room.name}</h2>
@@ -116,7 +200,7 @@ const RoomList = () => {
                         >
                             <h2>{room.name}</h2>
                         </button>
-        ))}
+                    ))}
             </div>
         </div>
     );

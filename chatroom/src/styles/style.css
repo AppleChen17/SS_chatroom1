@@ -120,4 +120,29 @@ nav .profile-area .profile-area {
 .send img {
   width: 80%;
   height: auto;
+}
+
+.room-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.room-list-item {
+  width: 80%;
+  height: 50px;
+  margin: 10px 20px;
+  padding: 0.2rem 1rem;
+  border: 1px solid black;
+  border-radius: 20px;
+  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+  background-color: #f5f5f5;
+}
+.room-list-item:hover {
+  transform: scale(1.02);
+}
+
+.RoomList {
+  background-color: antiquewhite;
 }/*# sourceMappingURL=style.css.map */

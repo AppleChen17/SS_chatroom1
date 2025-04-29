@@ -5,6 +5,7 @@ $themeColor : rgb(251, 179, 153);
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+    // background-color: antiquewhite;
 }
 
 h1,
@@ -82,7 +83,7 @@ nav {
             white-space: nowrap;
             border: red solid 3px;
 
-            // for "toggling" arrow !!!
+            // for "toggling" arrow !!! to be bigger !!!
             font-size: 2.5rem;
             color :black;
 
@@ -118,6 +119,7 @@ nav {
         }
     }
 }
+
 
 .popup-menu {
     position: absolute;
@@ -161,4 +163,41 @@ nav {
         width: 80%; 
         height: auto; 
     }
+}
+
+// .funct-btns {
+//     display: flex;
+//     flex-direction: column;
+//     color: red; /* 加一個明顯的測試色 */
+//     .func-btn {
+//         display: block;
+//         margin: 10px 10px;
+//         font-size: 20px;
+//     }
+// }
+
+.room-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.room-list-item { 
+    width:80%;
+    height: 50px;
+    margin: 10px 20px;
+    padding: 0.2rem 1rem;
+    border: 1px solid black;
+    border-radius: 20px;
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+    background-color: #f5f5f5;
+    &:hover {
+        // be bigger !
+        transform: scale(1.02);
+    }
+}
+
+.RoomList {
+    background-color:antiquewhite;
 }

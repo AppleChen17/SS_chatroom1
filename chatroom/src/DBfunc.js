@@ -25,22 +25,42 @@ const checkUserExists = async (email) => {
     const userRef = ref(database, `users/${encodeEmail(email)}`);
 
     try {
-        const find = await get(userRef);
-        if (find.exists()) {
-            console.log("User exist = ",find.val());
+        const snapshot = await get(userRef);
+        if (snapshot.exists()) {
+            console.log("User exists:", snapshot.val());
             return true;
         } 
         else {
-            console.log("User Not exist !");
+            console.log("User does not exist.");
             return false;
         }
-    } 
-    catch (error) {
+    } catch (error) {
         console.error("Error checking user existence:", error);
         return false;
     }
 }
 
+const createUser = async (email) => {
+    const result = await checkUserExists(email);
+    if(result) 
+    {
+        console.log("user already exists !",email);
+        // already exist
+        return;
+    }
+    const ENemail = encodeEmail(email);
+    const userRef = ref(database, `users/${ENemail}`);
+    
+    try {
+        await set(userRef, {
+            email: email,
+            // createdAt: Date.now()
+        });
+        console.log("User created successfully!");
+    } catch (error) {
+        console.error("Error creating user:", error);
+    }
+}
 
 // create a brand new chatroom with NO users !!!
 // need time => async !! (寫過不等的但是因為其他執行太快所以會有問題，等資料回來的時候function已經執行完)
@@ -61,6 +81,13 @@ const createChatroom = async (name) => {
 };
 
 const addUserToChatroom = async (roomID, email) => {
+    const result = await checkUserExists(email);
+    if(!result) 
+    {
+        alert("not a user in this chatroom web");
+        return;
+    }
+
     const roomMemRef = ref(database, `chatrooms/${roomID}/members`);
     await update(roomMemRef, {
         [encodeEmail(email)]: true, // use [EMAIL] = true !
@@ -75,5 +102,5 @@ const addUserToChatroom = async (roomID, email) => {
     console.log(`User ${email} added to chatroom ${roomName}`);
 }
 
-export { createChatroom, addUserToChatroom, encodeEmail};
+export { createChatroom, addUserToChatroom, encodeEmail, createUser};
 export default checkUserExists;
