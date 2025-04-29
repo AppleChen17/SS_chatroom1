@@ -1,14 +1,16 @@
 import React, { useState,useEffect } from "react";
-import { auth,database } from "../config"; // 從 config.js 導入 auth
+import { auth } from "../config"; // 從 config.js 導入 auth
 import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
   GoogleAuthProvider,
   signInWithPopup,
+  onAuthStateChanged,
 } from "firebase/auth";
 // useNavigate is "hook" => ask "navigate" function from it ! (router-dom並沒有把 navigate export，必須用 useNavigate 這個 hook 去獲取！!!)
 import { useNavigate } from "react-router-dom";
 import { createUser } from "../DBfunc";
+import { useRoom } from "../RoomContext";
 // import "./Login.css"; => 因為 REACT 中的 css 是全域性的，所以在這裡 login 也會跟著影響其他部分 !!
 
 // main function
@@ -17,8 +19,27 @@ const Login = () => {
     const [password, setPassword] = useState('');
     // hooker
     const navigate = useNavigate();
+    const { setSelectedRoomId } = useRoom();
 
-
+    useEffect(() => {
+      const unsubscribe = onAuthStateChanged(auth, (user) => {
+        console.log("Auth state changed:", user?.email);
+        setSelectedRoomId(null); // 每次登入狀態變化時重設聊天室
+      });
+  
+      return () => unsubscribe();
+    }, [auth.currentUser]);
+    // const { setSelectedRoomId } = useRoom(); // get the room id ! (is a HOOK !!!)
+    // // setSelectedRoomId(null);
+    // useEffect(() => {
+    //     const unsubscribe = onAuthStateChanged(auth, (user) => {
+    //       console.log("user changed:", user?.email);
+    //       setSelectedRoomId(null);
+    //     });
+      
+    //     return () => unsubscribe(); 
+    //   }, []);
+    
     // addEventListener functions !!!
     const create_alert = (type, message) => {
         console.log("create alert !",type,message);
@@ -127,7 +148,7 @@ const Login = () => {
                     className="form-control"
                     placeholder="Email address"
                     required
-                    autofocus
+                    autoFocus
                     // value={email}
                     onChange={(e) => setEmail(e.target.value)}
                 />

@@ -2,9 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import App from './App';
-import Login from './pages/Login';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from "react-router-dom";
+import { RoomProvider } from './RoomContext'; 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -13,10 +13,15 @@ root.render(
   //   {/* <Login/> */}
   // </React.StrictMode>
 
-  <BrowserRouter>
-    <App />
-    {/* <Login /> */}
-  </BrowserRouter>
+  // <React.StrictMode>
+    <BrowserRouter>
+      <RoomProvider>
+        <App />
+        {/* <Login /> */}
+      </RoomProvider>
+    </BrowserRouter>
+  // </React.StrictMode>
+
 );
 
 // If you want to start measuring performance in your app, pass a function

@@ -73,6 +73,7 @@ const createChatroom = async (name) => {
     await set(newroomRef, {
         name: name,
         Members: {}, // use [EMAIL] = true !
+        Message: {}, // use push(newMsg) -> get unique Id and store the text, sender, time...
     });
 
     // CONTINUE USE THE UNIQUE KEY to add members !
@@ -102,5 +103,44 @@ const addUserToChatroom = async (roomID, email) => {
     console.log(`User ${email} added to chatroom ${roomName}`);
 }
 
-export { createChatroom, addUserToChatroom, encodeEmail, createUser};
+const createMessage = async(roomID,text,email) => {
+    const MsgRef = ref(database,`chatrooms/${roomID}/Message`);
+    const newMsgRef = push(MsgRef); // add a message
+
+    await set(newMsgRef, {
+        msg: text,
+        sender: email,
+        time: Date.now(),
+    });
+    console.log("Message key:", newMsgRef.key, "roomid = " ,roomID);
+    return newMsgRef.key;
+};
+
+// load msg in 
+const loadMessage = async (roomID) => {
+    const MsgRef = ref(database, `chatrooms/${roomID}/Message`);
+    const snapshot = await get(MsgRef);
+    
+    if (snapshot.exists()) 
+    {
+      const messages = Object.entries(snapshot.val()) // to array !
+        .map(([key, value]) => ({
+          id: key,        
+          sender: value.sender,
+          time: value.time, 
+          msg: value.msg,
+        }))
+        .sort((a, b) => a.time - b.time); // 可以排序 !!!
+  
+      console.log("messages", messages);
+      return messages; 
+    } 
+    else 
+    {
+      console.log("No messages found.");
+      return null;
+    }
+  };
+
+export { createChatroom, addUserToChatroom, encodeEmail, createUser,createMessage, loadMessage};
 export default checkUserExists;

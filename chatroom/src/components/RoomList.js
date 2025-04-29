@@ -2,6 +2,7 @@ import { useState, useEffect} from 'react';
 import { auth,database } from "../config";
 import { createChatroom,addUserToChatroom,encodeEmail } from "../DBfunc";
 import { ref,onValue } from "firebase/database";
+import { useRoom } from '../RoomContext'; // useRoom => get the room id ! (is a HOOK !!!)
 
 // 對某個使用者而言，目前可以 access 到的 chatroom list !
 // hint: 要用 onValue => 可以處理即時更新的資料庫資料 (firebase database) !
@@ -57,7 +58,8 @@ const RoomList = () => {
     };
 
 
-    const [selectedRoomId, setSelectedRoomId] = useState(null);// for the selected room id 
+    // const [selectedRoomId, setSelectedRoomId] = useState(null);// for the selected room id 
+    const { selectedRoomId, setSelectedRoomId } = useRoom();
 
     const handleRoomClick = (id) => {
         console.log("roomid = ", id);
@@ -202,6 +204,9 @@ const RoomList = () => {
                         </button>
                     ))}
             </div>
+
+
+
         </div>
     );
 };
@@ -234,3 +239,6 @@ const RoomList = () => {
 // };
 
 export default RoomList;
+// export default selectedRoomId;
+
+// export { RoomList,selectedRoomId };

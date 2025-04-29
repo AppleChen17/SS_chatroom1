@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import RoomList from '../components/RoomList';
 import { createChatroom, addUserToChatroom } from '../DBfunc';
 import { auth,database } from "../config";
+import ChatInput from '../components/ChatInput';
 
 const Chatroom = () => {
     // const oom = [
@@ -12,9 +13,16 @@ const Chatroom = () => {
 
     return (
         <>
+        {/* here need to do "flex" ! (正常情況 -> 左右 | RWD -> 上下排列) */}
         <div className='List'>
             <h1>Chatroom</h1>
             <RoomList/>
+        </div>
+
+        <div className='Chat'>
+            {/* 之後可以放 這個 chatroom 的名字 ! */}
+            <h1>Chat</h1>
+            <ChatInput/>
         </div>
         {/* <button onClick={() => createChatroom()}>Create Chatroom</button> */}
         </>
