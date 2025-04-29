@@ -47,36 +47,28 @@ const ChatInput = () => {
         }
     };
 
-  return (
-    <div>
-      {/* the upper message part ! */}
-      <div className='msg' key="msg">
-      {allmessages.map((msgObj) => (
-        <div key={msgObj.key}>
-            At {new Date(msgObj.time).toLocaleTimeString()} {msgObj.sender}: {msgObj.msg}
+    return (
+      <div className="chat-container">
+        <div className="msg">
+          {allmessages.map((msgObj) => (
+            <div key={msgObj.key} className={msgObj.sender === auth.currentUser.email ? 'my-message' : 'other-message'}>
+              <span>{new Date(msgObj.time).toLocaleTimeString()}</span>
+              <div>{msgObj.sender}: {msgObj.msg}</div>
+            </div>
+          ))}
         </div>
-        ))}
+        <div className="input-msg">
+          <input
+            type="text"
+            value={newMessage}
+            onChange={(e) => setNewMessage(e.target.value)}
+            placeholder="Type a message : D"
+          />
+          <button type="button" className="btn btn-primary" onClick={handleSend}>
+            <i className="bi bi-send-fill"></i>Send
+          </button>
+        </div>
       </div>
-
-      {/* input message */}
-      <div className = "input-msg">
-        <input
-          type="text"
-          value={newMessage}
-          onChange={(e) => setNewMessage(e.target.value)}
-          placeholder="Type a message : D"
-        />
-
-        {/* send ! */}
-        {/* <button onClick={handleSend} className='send'>
-            <img src='../'></img>
-        </button >*/}
-
-        <button type="button" class="btn btn-primary" onClick={handleSend}>
-        <i class="bi bi-send-fill"></i>Send
-        </button>
-      </div>
-    </div>
   );
 };
 

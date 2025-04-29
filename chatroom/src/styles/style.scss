@@ -6,6 +6,7 @@ $themeColor : rgb(251, 179, 153);
     margin: 0;
     box-sizing: border-box;
     // background-color: antiquewhite;
+    // overflow-y: hidden;
 }
 
 h1,
@@ -59,7 +60,7 @@ nav {
         }
 
         .profile {
-            border: 3px solid blue;
+            // border: 3px solid blue;
             text-align: right;
             font-size: 1.5rem;
             // width: auto;
@@ -82,7 +83,7 @@ nav {
             // max-width: 300px;
             overflow: visible;
             white-space: nowrap;
-            border: red solid 3px;
+            // border: red solid 3px;
 
             // for "toggling" arrow !!! to be bigger !!!
             font-size: 2.5rem;
@@ -200,7 +201,7 @@ nav {
 }
 
 .RoomList {
-    background-color:antiquewhite;
+    // background-color:antiquewhite;
     // height: 100%;
 }
 
@@ -222,3 +223,130 @@ nav {
     flex: 5 1 600px;
     // max-width: 650px;
 }
+
+/* Container for chat messages */
+.chat-container {
+    display: flex;
+    flex-direction: column;
+    height: 100dvh;  // Ensure the container takes up the full height of the parent container
+  }
+  
+  /* Chat message list that is scrollable */
+  .msg {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+    font-family: 'Lexend Deca', sans-serif;
+    overflow-y: auto;  // Allow vertical scrolling when content overflows
+    max-height: 650px;  // Set a fixed height to control the scroll area
+    flex-grow: 1;  // Allow the chat area to expand and take remaining space
+  
+    .my-message {
+      align-self: flex-end;  // Align to the right
+      background-color: #d1e7dd;
+      padding: 10px;
+      border-radius: 10px;
+      max-width: 70%;
+    }
+  
+    .other-message {
+      align-self: flex-start;  // Align to the left
+      background-color: #f8d7da;
+      padding: 10px;
+      border-radius: 10px;
+      max-width: 70%;
+    }
+  }
+
+  
+  /* Input message area */
+  .input-msg {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    // gap: 10px;
+    margin-top: 5px;
+    input {
+      width: 80%;
+      padding: 10px;
+      border-radius: 20px;
+      border: 1px solid #ccc;
+    }
+  
+    button {
+      padding: 10px 15px;
+      border: none;
+      background-color: #007bff;
+      color: white;
+    }
+  }
+
+  .App {
+    overflow-y: hidden;
+  }
+
+  /* Ensure full viewport height */
+.chatroom-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+  }
+  
+  /* Main body splits horizontally (desktop) or vertically (mobile) */
+  .chatroom {
+    display: flex;
+    flex: 1;
+    // overflow: hidden; /* prevents outer overflow */
+    flex-direction: row;
+  }
+  
+  /* Sidebar */
+  .chatroom-sidebar {
+    width: 350px;
+    min-width: 180px;
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid #ccc;
+    background-color: #ffffff;
+  }
+  
+  /* Main Chat */
+  .chatroom-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff;
+  }
+  
+  /* Headers */
+  .section-header {
+    padding: 10px;
+    border-bottom: 2px solid #000;
+    background-color: #f5f5f5;
+    text-align: center;
+    flex-shrink: 0;
+  }
+  
+  .scrollable {
+    flex: 1;
+    overflow-y: auto;
+    padding: 10px;
+  }
+
+  @media (max-width: 768px) {
+    .chatroom-body {
+      flex-direction: column;
+    }
+  
+    .chatroom-sidebar {
+      width: 50%;
+      min-height: 200px;
+    //   border-right: none;
+      border-bottom: 1px solid #ccc;
+    }
+  
+    .chatroom-main {
+      flex: 1;
+    }
+  }

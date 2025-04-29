@@ -42,7 +42,6 @@ nav .profile-area button .bell {
   width: 25%;
 }
 nav .profile-area .profile {
-  border: 3px solid blue;
   text-align: right;
   font-size: 1.5rem;
   white-space: nowrap;
@@ -59,7 +58,6 @@ nav .profile-area #dropdown-basic {
   width: 100%;
   overflow: visible;
   white-space: nowrap;
-  border: red solid 3px;
   font-size: 2.5rem;
   color: black;
 }
@@ -144,10 +142,6 @@ nav .profile-area .profile-area {
   transform: scale(1.02);
 }
 
-.RoomList {
-  background-color: antiquewhite;
-}
-
 .Chatroom {
   display: flex;
   flex-direction: row;
@@ -163,4 +157,122 @@ nav .profile-area .profile-area {
 .Chat {
   border: 3px red solid;
   flex: 5 1 600px;
+}
+
+/* Container for chat messages */
+.chat-container {
+  display: flex;
+  flex-direction: column;
+  height: 100dvh;
+}
+
+/* Chat message list that is scrollable */
+.msg {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 10px;
+  font-family: "Lexend Deca", sans-serif;
+  overflow-y: auto;
+  max-height: 650px;
+  flex-grow: 1;
+}
+.msg .my-message {
+  align-self: flex-end;
+  background-color: #d1e7dd;
+  padding: 10px;
+  border-radius: 10px;
+  max-width: 70%;
+}
+.msg .other-message {
+  align-self: flex-start;
+  background-color: #f8d7da;
+  padding: 10px;
+  border-radius: 10px;
+  max-width: 70%;
+}
+
+/* Input message area */
+.input-msg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 5px;
+}
+.input-msg input {
+  width: 80%;
+  padding: 10px;
+  border-radius: 20px;
+  border: 1px solid #ccc;
+}
+.input-msg button {
+  padding: 10px 15px;
+  border: none;
+  background-color: #007bff;
+  color: white;
+}
+
+.App {
+  overflow-y: hidden;
+}
+
+/* Ensure full viewport height */
+.chatroom-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+/* Main body splits horizontally (desktop) or vertically (mobile) */
+.chatroom {
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+}
+
+/* Sidebar */
+.chatroom-sidebar {
+  width: 350px;
+  min-width: 180px;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid #ccc;
+  background-color: #ffffff;
+}
+
+/* Main Chat */
+.chatroom-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
+}
+
+/* Headers */
+.section-header {
+  padding: 10px;
+  border-bottom: 2px solid #000;
+  background-color: #f5f5f5;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.scrollable {
+  flex: 1;
+  overflow-y: auto;
+  padding: 10px;
+}
+
+@media (max-width: 768px) {
+  .chatroom-body {
+    flex-direction: column;
+  }
+  .chatroom-sidebar {
+    width: 50%;
+    min-height: 200px;
+    border-bottom: 1px solid #ccc;
+  }
+  .chatroom-main {
+    flex: 1;
+  }
 }/*# sourceMappingURL=style.css.map */

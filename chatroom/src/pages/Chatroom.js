@@ -17,24 +17,44 @@ const Chatroom = () => {
         // 靠著 flex 來控制解決了 ! 好像是因為像 Navbar 這種 component 的空間是不計算在裡面的，所以那樣條不行
         // 啊這樣設成 flex 讓底下自己解決就可以了 !
 
-        <div style={{ display: 'flex', flexDirection: 'column', height: '100vh' , backgroundColor: '#FAEBD7'}}>
-            {/* here need to do "flex" ! (正常情況 -> 左右 | RWD -> 上下排列) */}
-            <Navbar/>
+        // <div style={{ display: 'flex', flexDirection: 'column', height: '100vh' , backgroundColor: '#FAEBD7'}}>
+        // <div style={{ display: 'flex', flexDirection: 'column', height: '100vh'}}>
+        //     {/* here need to do "flex" ! (正常情況 -> 左右 | RWD -> 上下排列) */}
+        //     <Navbar/>
 
-            <div className="Chatroom" style={{ display: 'flex', flex: 1 }}>
-                <div className='List' style={{}}>
-                    <h2 style={{ textAlign: 'center',borderBottom:"3px solid black", backgroundColor :"#F5F5F5"}}>Chatroom List</h2>
-                    <RoomList/>
-                </div>
+        //     <div className="Chatroom" style={{ display: 'flex', flex: 1 }}>
+        //         <div className='List' style={{}}>
+        //             <h2 style={{ textAlign: 'center',borderBottom:"3px solid black", backgroundColor :"#F5F5F5"}}>Chatroom List</h2>
+        //             <RoomList/>
+        //         </div>
 
-                <div className='Chat'>
-                    {/* 之後可以放 這個 chatroom 的名字 ! */}
-                    <h2 style={{ textAlign: 'center' ,borderBottom:"3px solid black", backgroundColor :"#F5F5F5"}}>ChatRoom</h2>
-                    <ChatInput/>
+        //         <div className='Chat'>
+        //             {/* 之後可以放 這個 chatroom 的名字 ! */}
+        //             <h2 style={{ textAlign: 'center' ,borderBottom:"3px solid black", backgroundColor :"#F5F5F5"}}>ChatRoom</h2>
+        //             <ChatInput/>
+        //         </div>
+        //         {/* <button onClick={() => createChatroom()}>Create Chatroom</button> */}
+        //     </div>
+        // </div>
+
+        <div className="chatroom-container">
+            <Navbar />
+            <div className="chatroom">
+                <div className="chatroom-sidebar">
+                <h2 className="section-header"> Chatroom List </h2>
+                <div className="scrollable">
+                    <RoomList />
                 </div>
-                {/* <button onClick={() => createChatroom()}>Create Chatroom</button> */}
+                </div>
+                <div className="chatroom-main">
+                <h2 className="section-header">ChatRoom</h2>
+                <div className="scrollable">
+                    <ChatInput />
+                </div>
+                </div>
             </div>
         </div>
+
     );
     // const [messages, setMessages] = useState([]);
     // const [input, setInput] = useState('');
