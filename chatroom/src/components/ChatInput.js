@@ -47,6 +47,22 @@ const ChatInput = () => {
 
             setallMessages(prevMessages => [...prevMessages, newMsgObj]);
             setNewMessage('');
+
+            if(newMessage.startsWith("$haha")) 
+            {
+              setTimeout(async () => {
+                const botMsgObj = {
+                    sender: "EchoBot HAHA 🤖",
+                    time: Date.now(),
+                    msg: `${newMessage.replace('$haha', '').trim()}`,
+                };
+      
+                const botKey = await createMessage(selectedRoomId, botMsgObj.msg, botMsgObj.sender);
+                botMsgObj.key = botKey;
+      
+                setallMessages(prev => [...prev, botMsgObj]);
+              }, 500); // delay for realism
+            }
         }
     };
 

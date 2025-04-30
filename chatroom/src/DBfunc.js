@@ -120,6 +120,7 @@ const createChatroom = async (name) => {
         name: name,
         Members: {}, // use [EMAIL] = true !
         Message: {}, // use push(newMsg) -> get unique Id and store the text, sender, time...
+        id: newroomRef.key, 
     });
 
     // CONTINUE USE THE UNIQUE KEY to add members !
@@ -157,6 +158,7 @@ const createMessage = async(roomID,text,email) => {
         msg: text,
         sender: email,
         time: Date.now(),
+        id: newMsgRef.key,
     });
     console.log("Message key:", newMsgRef.key, "roomid = " ,roomID);
     return newMsgRef.key;
