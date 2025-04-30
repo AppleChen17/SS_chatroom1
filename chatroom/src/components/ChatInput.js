@@ -56,7 +56,7 @@ const ChatInput = () => {
           {allmessages.map((msgObj) => (
             <div key={msgObj.key} className={msgObj.sender === auth.currentUser.email ? 'my-message' : 'other-message'}>
               <span>{new Date(msgObj.time).toLocaleTimeString()}</span>
-              <div>{msgObj.sender}: {msgObj.msg}</div>
+              <div style={{fontSize:"1.25rem"}}>{msgObj.sender === auth.currentUser.email ? auth.currentUser.displayName : msgObj.sender}: {msgObj.msg}</div>
             </div>
           ))}
         </div>
@@ -66,6 +66,7 @@ const ChatInput = () => {
             value={newMessage}
             onChange={(e) => setNewMessage(e.target.value)}
             placeholder="Type a message : D"
+            style={{fontSize: "1.25rem",}}
           />
           <button type="button" className="btn btn-primary" onClick={handleSend}>
             {/* <i className="bi bi-send-fill"></i>Send */}

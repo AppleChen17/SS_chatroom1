@@ -97,11 +97,14 @@ const RoomList = () => {
                             borderRadius: "5px", 
                             border: "none", 
                             cursor: "pointer",
-                            fontSize: "1.2rem"
+                            fontSize: "1.2rem",
+                            fontFamily: "Lexend Deca",
+                            // fontWeight: "bold",
                         }}
                     >
-                            Add Chatroom
-                    </button>
+                            Add Chatroom 
+                    </button> 
+                    {/* input = prompt("user email") */}
                     {/* 顯示輸入框 */}
                     {showInput && (
                         <div 
@@ -118,7 +121,7 @@ const RoomList = () => {
                             <button 
                                 onClick={async () => handleCreateRoom(newRoomName)}
                                 style={{backgroundColor:"#F4D4AA",padding:"2px 5px",margin:"2px 2px",
-                                    borderRadius:"10px", border:"none",
+                                    borderRadius:"10px", border:"none",fontFamily: "Lexend Deca",
                                 }}
                             >
                                     Create
@@ -126,7 +129,7 @@ const RoomList = () => {
                             <button 
                                 onClick={() => setShowInput(false)}
                                 style={{backgroundColor:"#F4D4AA",padding:"2px 5px",margin:"2px 2px",
-                                     borderRadius:"10px", border:"none",}}
+                                     borderRadius:"10px", border:"none",fontFamily: "Lexend Deca",}}
                             >
                                 Cancel
                             </button>
@@ -148,7 +151,8 @@ const RoomList = () => {
                             borderRadius: "5px", 
                             border: "none", 
                             cursor: "pointer",
-                            fontSize: "1.2rem"
+                            fontSize: "1.2rem",
+                            fontFamily: "Lexend Deca",
                         }}
                     >
                         Invite user
@@ -167,7 +171,7 @@ const RoomList = () => {
                             <button 
                                 onClick={() => addUserToChatroom(selectedRoomId,newInviteEmail)}
                                 style={{backgroundColor:"#F4D4AA",padding:"2px 5px",margin:"2px 2px",
-                                    borderRadius:"10px", border:"none",}}
+                                    borderRadius:"10px", border:"none",fontFamily: "Lexend Deca",}}
                             >
                                 Invite
                             </button>
@@ -175,7 +179,7 @@ const RoomList = () => {
                             <button 
                                 onClick={() => setShowInvite(false)}
                                 style={{backgroundColor:"#F4D4AA",padding:"2px 5px",margin:"2px 2px",
-                                    borderRadius:"10px", border:"none",}}
+                                    borderRadius:"10px", border:"none",fontFamily: "Lexend Deca",}}
                             >
                                     Cancel
                             </button>

@@ -365,9 +365,9 @@ nav {
 
 .profile-container {
   max-width: 500px;
-  margin: 2rem auto;
+  margin: 1rem auto;
   padding: 2rem;
-  background: #ffffff;
+  background: rgb(251, 179, 153,0.5);
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
   font-family:Lexend Deca;
@@ -411,7 +411,7 @@ nav {
   input {
     width: 100%;
     padding: 0.5rem;
-    font-size: 1rem;
+    font-size: 1.2rem;
     border: 1px solid #ccc;
     border-radius: 5px;
   }

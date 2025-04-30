@@ -30,7 +30,7 @@ const Login = () => {
       });
   
       return () => unsubscribe();
-    }, [auth.currentUser]);
+    }, []);
     // const { setSelectedRoomId } = useRoom(); // get the room id ! (is a HOOK !!!)
     // // setSelectedRoomId(null);
     // useEffect(() => {
@@ -61,15 +61,17 @@ const Login = () => {
     };
 
     const createChromeNotification = () => {
-        if (Notification.permission === "granted") {
-          setTimeout(() => {
+        if (Notification.permission === "granted") 
+            {
+        //   setTimeout(() => {
             new Notification("Login Success", {
               body: "Log in chat room success",
               icon: "/bell-solid.svg", // 注意：這必須是 public 資料夾內的圖片路徑
             });
-            console.log("create chrome notification!");
-          }, 100); // 加一點 delay 確保畫面穩定後再送
-        } else {
+            console.log("create chrome notification!");}
+        //   }, 100); // 加一點 delay 確保畫面穩定後再送
+        // } 
+        else {
           console.log("Notification permission is not granted.");
         }
       };
