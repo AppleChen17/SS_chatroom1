@@ -1,7 +1,8 @@
 // 覺得以 chatroom 為主儲存在 database 的方式會比較清楚 ! => 所以調整一下 !
 
-import { database } from "./config"; // 從 config.js 導入 auth
-import { get, push, ref, set, update} from "firebase/database";
+import { auth, database } from "./config"; 
+import { get, push, ref, set, update, remove} from "firebase/database";
+import { updateProfile,updateEmail } from "firebase/auth";
 
 const isValidChar = (char) => {
     const code = char.charCodeAt(0);
@@ -64,6 +65,51 @@ const createUser = async (email) => {
 
 // create a brand new chatroom with NO users !!!
 // need time => async !! (寫過不等的但是因為其他執行太快所以會有問題，等資料回來的時候function已經執行完)
+
+
+// 要改成使用 uid 的嗎...?
+// const checkUserExists = async (uid) => {
+//     console.log("check user exists!", uid);
+//     const userRef = ref(database, `users/${uid}`);
+
+//     try {
+//         const snapshot = await get(userRef);
+//         if (snapshot.exists()) {
+//             console.log("User exists:", snapshot.val());
+//             return true;
+//         } else {
+//             console.log("User does not exist.");
+//             return false;
+//         }
+//     } catch (error) {
+//         console.error("Error checking user existence:", error);
+//         return false;
+//     }
+// };
+
+// const createUser = async (email) => {
+//     const uid = auth.currentUser.uid; // 使用 Firebase Auth 提供的 uid
+//     const result = await checkUserExists(uid);
+    
+//     if (result) {
+//         console.log("User already exists!", email);
+//         return;
+//     }
+
+//     const userRef = ref(database, `users/${uid}`);
+    
+//     try {
+//         await set(userRef, {
+//             email: email,
+//             uid: uid, // 儲存 uid，這樣即使 email 變更，也能通過 uid 繼續辨識用戶
+//             // createdAt: Date.now()
+//         });
+//         console.log("User created successfully!");
+//     } catch (error) {
+//         console.error("Error creating user:", error);
+//     }
+// };
+
 const createChatroom = async (name) => {
     const chatroomRef = ref(database,`chatrooms`);
     // by this way (push!!!!!) => a UNIQUE KEY will be generated for each chatroom ! => easier to identify!
@@ -142,5 +188,57 @@ const loadMessage = async (roomID) => {
     }
   };
 
-export { createChatroom, addUserToChatroom, encodeEmail, createUser,createMessage, loadMessage};
+const updateUserPhotoURL = async (email, photoURL) => {
+    const ENemail = encodeEmail(email);
+    const userRef = ref(database, `users/${ENemail}`);
+  
+    try {
+      await update(userRef, { photoURL });
+      if (auth.currentUser) {
+        await updateProfile(auth.currentUser, {
+          photoURL: photoURL,
+        });
+      }
+  
+      console.log("photoURL updated in both Realtime DB and Auth");
+    } 
+    catch (error) {
+      console.error("Error updating photoURL:", error);
+    }
+  };
+
+  const changeUserEmail = async (oldEmail, newEmail) => {
+    // NEED TO ALSO CHANGE data !!!!
+    const oldKey = encodeEmail(oldEmail);
+    const newKey = encodeEmail(newEmail);
+  
+    const oldRef = ref(database, `users/${oldKey}`);
+    const newRef = ref(database, `users/${newKey}`);
+  
+    try {
+      await updateEmail(auth.currentUser, newEmail);
+  
+
+      const snapshot = await get(oldRef);
+      if (snapshot.exists()) {
+        const data = snapshot.val();
+  
+        await set(newRef, { ...data, email: newEmail });
+  
+        await remove(oldRef);
+  
+        console.log("Email updated and data migrated successfully!");
+      } 
+      else 
+      {
+        console.log("No old data found to migrate.");
+      }
+    } 
+    catch (error) 
+    {
+      console.error("Failed to update email or migrate data:", error);
+    }
+  };
+
+export { createChatroom, addUserToChatroom, encodeEmail, createUser,createMessage, loadMessage, updateUserPhotoURL };
 export default checkUserExists;

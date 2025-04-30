@@ -13,6 +13,8 @@ import { createUser } from "../DBfunc";
 import { useRoom } from "../RoomContext";
 // import "./Login.css"; => 因為 REACT 中的 css 是全域性的，所以在這裡 login 也會跟著影響其他部分 !!
 
+
+  
 // main function
 const Login = () => {
     const [email, setEmail] = useState(''); //setEmail => change the value of email
@@ -58,9 +60,20 @@ const Login = () => {
         }
     };
 
-    const create_chromenotification = () => {
-
-    }
+    const createChromeNotification = () => {
+        if (Notification.permission === "granted") {
+          setTimeout(() => {
+            new Notification("Login Success", {
+              body: "Log in chat room success",
+              icon: "/bell-solid.svg", // 注意：這必須是 public 資料夾內的圖片路徑
+            });
+            console.log("create chrome notification!");
+          }, 100); // 加一點 delay 確保畫面穩定後再送
+        } else {
+          console.log("Notification permission is not granted.");
+        }
+      };
+    
     // SIGNIN
     const handleSignin = (email,password) => {
         console.log("sign in !");
@@ -71,9 +84,11 @@ const Login = () => {
             // Signed in    
             const user = userCredential.user;
             console.log("user",user);
-            create_alert("success", "Sign in successfully!");
+            createChromeNotification();
+            // create_alert("success", "Sign in successfully!");
             setEmail("");
             setPassword("");
+            // createChromeNotification();
             navigate("/chatroom");
         })
         .catch((error) => {
@@ -94,10 +109,12 @@ const Login = () => {
             // Signed in    
             const user = userCredential.user;
             console.log("user",user);
-            create_alert("success", "Account created successfully!");
+            createChromeNotification();
+            // create_alert("success", "Account created successfully!");
             setEmail("");
             setPassword("");
             await createUser(email);
+            // createChromeNotification();
             navigate("/chatroom");
         })
         .catch((error) => {
@@ -112,9 +129,11 @@ const Login = () => {
         // console.log(email,password);
         signInWithPopup(auth, new GoogleAuthProvider())
         .then(async (userCredential) => {
-            create_alert("success", "Google signed in successfully!");
+            createChromeNotification();
+            // create_alert("success", "Google signed in successfully!");
             setEmail("");
             setPassword("");
+            // createChromeNotification();
             await createUser(auth.currentUser.email);
             navigate("/chatroom");
         })
@@ -145,12 +164,16 @@ const Login = () => {
                     padding: "30px",
                     borderRadius: "10px",
                     marginTop: "100px",
-                    height: "550px",
+                    height: "600px",
                 }}
             >
                 <h1>Login</h1>
-                <button>
-                    <img className='bell' src="/bell-solid.svg" alt="notification" />
+                <button style={{all:"unset"}}>
+                    <img className='bell' 
+                    src="/bell-solid.svg" 
+                    alt="notification" 
+                    onClick={requestPermission}
+                    />
                 </button>
                 <h4>Please enter your credentials to log in.</h4>
 

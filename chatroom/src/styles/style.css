@@ -16,11 +16,13 @@ h6 {
 }
 
 .bell {
-  width: 100px;
-  height: 100px;
+  width: 50px;
+  height: 50px;
+  background-color: "#433232a6";
 }
 .bell:hover {
-  width: 110%;
+  transform: scale(1.2);
+  background-color: "#433232a6";
 }
 
 nav {
@@ -271,4 +273,55 @@ nav .profile-area .profile-area {
   .chatroom-main {
     flex: 1;
   }
+}
+.profile-container {
+  max-width: 500px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  font-family: Lexend Deca;
+}
+.profile-container h1 {
+  text-align: center;
+}
+.profile-container img {
+  display: block;
+  margin: 0 auto;
+}
+.profile-container img:hover {
+  transition: all 0.3s ease;
+  padding: 0.2rem;
+}
+.profile-container button {
+  display: block;
+  width: 100%;
+  padding: 0.75rem;
+  font-size: 1rem;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.profile-container button:hover {
+  background-color: #0056b3;
+}
+.profile-container input {
+  width: 100%;
+  padding: 0.5rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+.profile-container label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.profile-container div {
+  margin-bottom: 1rem;
 }/*# sourceMappingURL=style.css.map */

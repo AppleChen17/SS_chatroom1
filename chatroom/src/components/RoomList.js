@@ -85,11 +85,12 @@ const RoomList = () => {
                 {/* default row flex */}
                 <div
                     style={{ display: "flex", alignItems:"center", flexWrap: "wrap"}}>
+                    <h3 style={{width:"100%"}}>Functions</h3>
                     <button 
                         className='func-btn' 
                         onClick={() => setShowInput(true)}
                         style={{ margin: "10px 10px", 
-                            width:"150px", 
+                            width:"100%", 
                             height: "50px", 
                             backgroundColor: "#FAEBD7", 
                             color: "black", 
@@ -139,7 +140,8 @@ const RoomList = () => {
                         className='func-btn' 
                         onClick={() => setShowInvite(true)}
                         style={{ margin: "10px 10px", 
-                            width:"150px", 
+                            // width:"150px", 
+                            width: "100%",
                             height: "50px", 
                             backgroundColor: "#FAEBD7", 
                             color: "black", 
@@ -191,6 +193,7 @@ const RoomList = () => {
                         <h2>{room.name}</h2>
                     </button>
                 ))} */}
+                <h3 style={{width:"100%"}}>Your Rooms</h3>
 
                 {rooms.filter((room) => room.members.includes(encodeEmail(auth.currentUser.email)))
                     .map((room) => (

@@ -1,5 +1,5 @@
-// import React, { useState, useRef, useEffect } from 'react';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+// import React from 'react';
 import Dropdown from 'react-bootstrap/Dropdown';
 import { useNavigate } from 'react-router-dom';
 import '../styles/style.css';
@@ -31,6 +31,7 @@ const Navbar = () => {
       console.error("Logout failed:", error.message);
     });
   }
+
   // const toggleMenu = () => {
   //   setOpenMenu(!Menu);
   // };
@@ -69,8 +70,12 @@ const Navbar = () => {
       <Dropdown className = "profile">
         <Dropdown.Toggle id="dropdown-basic">
           {/*  variant="success" => 原本上面好像會造成綠色背景的 toggle 特效 */}
-          <img src="/user-3296.svg" alt="photo" />
-          <h4>{user}</h4>
+          <img 
+              src={auth.currentUser?.photoURL || "/user-3296.svg"} 
+              alt="photo" 
+              style={{ width: "40px", height: "40px", borderRadius: "50%" }} 
+          />
+          <h4>{auth.currentUser.displayName || user}</h4>
         </Dropdown.Toggle>
 
         <Dropdown.Menu >
