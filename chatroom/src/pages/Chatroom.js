@@ -1,7 +1,10 @@
-import React from 'react';
+import React ,{ useState,useEffect }from 'react';
 import RoomList from '../components/RoomList';
 import ChatInput from '../components/ChatInput';
 import Navbar from '../components/Navbar';
+import { database } from '../config'; 
+import { get, push, ref, set, update, remove} from "firebase/database";
+import { useRoom } from '../RoomContext';
 
 const Chatroom = () => {
     // const oom = [
@@ -9,10 +12,21 @@ const Chatroom = () => {
     //     { id: 2, name: 'Technology' },
     //     { id: 3, name: 'Sports' },
     // ];
+    const { selectedRoomId } = useRoom();
+    const [roomName, setRoomName] = useState(''); // for the room name !
 
-    // const { selectedRoomId } = useRoom(); // 這個是 HOOK ! (useRoom 是一個 HOOK)
-    // const [chatroomName, setChatroomName] = useState('');
+    const getRoomName = async () => {
+      const roomNameRef = ref(database, `chatrooms/${selectedRoomId}/name`);
+      const snapshot = await get(roomNameRef);
+      setRoomName(snapshot.exists() ? snapshot.val() : "(unknown)");
+    }
 
+    useEffect(() => {
+        if (selectedRoomId) {
+          getRoomName();
+        }
+      }, [selectedRoomId]);
+    
     return (
         // 靠著 flex 來控制解決了 ! 好像是因為像 Navbar 這種 component 的空間是不計算在裡面的，所以那樣條不行
         // 啊這樣設成 flex 讓底下自己解決就可以了 !
@@ -47,7 +61,7 @@ const Chatroom = () => {
                 </div>
                 </div>
                 <div className="chatroom-main">
-                <h2 className="section-header">ChatRoom</h2>
+                <h2 className="section-header">{roomName}</h2>
                 <div className="scrollable">
                     <ChatInput />
                 </div>

@@ -4,7 +4,7 @@ import React, { useState,useEffect } from 'react';
 import "../styles/style.css"
 import { createMessage } from '../DBfunc'; 
 import { useRoom } from '../RoomContext'; // useRoom => get the room id ! (is a HOOK !!!)
-import { auth } from '../config'; 
+import { auth,database } from '../config'; 
 import { loadMessage } from '../DBfunc';
 import ReactDOM from 'react-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
