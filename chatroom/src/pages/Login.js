@@ -169,7 +169,17 @@ const Login = () => {
                     height: "600px",
                 }}
             >
-                <h1>Login</h1>
+
+                {/* className="my-element" */}
+                <h1 className="login">
+                    {/* ref: https://www.youtube.com/shorts/AUafNbgATw8 */}
+                    <span className="L" style={{color: "#f7c37e", animationDelay: "0s"}}>L</span>
+                    <span className="o" style={{color: "#f7c37e", animationDelay: "0.1s"}}>o</span>
+                    <span className="g" style={{color: "#f7c37e", animationDelay: "0.2s"}}>g</span>
+                    <span className="i" style={{animationDelay: "0.3s"}}>i</span>
+                    <span className="n" style={{animationDelay: "0.4s"}}>n</span>
+                    {/* Login */}
+                </h1>
                 <button style={{all:"unset"}}>
                     <img className='bell' 
                     src="/bell-solid.svg" 
@@ -183,7 +193,8 @@ const Login = () => {
                     className="sr-only" 
                     style={{fontSize: "1.5rem",margin: "1rem 1rem"}}
                 >
-                    Email address
+                    <span style={{color: "#f7c37e"}}>Email </span>
+                    <span>address</span> 
                 </label>
                 <input
                     type="email"
@@ -200,7 +211,10 @@ const Login = () => {
                         className="sr-only" 
                         style={{fontSize: "1.5rem",margin: "1rem 1rem"}}
                 >
-                    Password</label>
+                    <span>Pass</span>
+                    <span style={{color: "#f7c37e"}}>word</span>
+                    {/* Password */}
+                </label>
                 <input
                     type="password"
                     id="inputPassword"

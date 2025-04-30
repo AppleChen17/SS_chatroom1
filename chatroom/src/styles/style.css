@@ -25,6 +25,42 @@ h6 {
   background-color: "#433232a6";
 }
 
+.login-area .login {
+  text-transform: uppercase;
+  display: inline-block;
+  animation: bounce 1s ease-in-out infinite;
+}
+
+@keyframes bounce {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+}
+@keyframes come-in-left-bounce {
+  0% {
+    transform: translate(-100%, 0);
+    opacity: 0;
+  }
+  40% {
+    transform: translate(10%, -30px);
+    opacity: 1;
+  }
+  60% {
+    transform: translate(-5%, 0px);
+  }
+  80% {
+    transform: translate(2%, -10px);
+  }
+  100% {
+    transform: translate(0%, 0px);
+  }
+}
 nav {
   text-decoration: none;
   display: flex;
@@ -38,6 +74,7 @@ nav div {
 }
 nav div h1 {
   font-size: 2.5rem;
+  animation: come-in-left-bounce 1s ease;
 }
 nav .profile-area {
   display: flex;
@@ -234,7 +271,7 @@ nav .profile-area .profile-area {
   min-width: 180px;
   display: flex;
   flex-direction: column;
-  border-right: 1px solid #ccc;
+  border-right: 2px solid #ccc;
   background-color: #ffffff;
 }
 
@@ -268,7 +305,7 @@ nav .profile-area .profile-area {
   .chatroom-list {
     width: 50%;
     min-height: 200px;
-    border-bottom: 1px solid #ccc;
+    border-bottom: 2px solid #ccc;
   }
   .chatroom-main {
     flex: 1;
