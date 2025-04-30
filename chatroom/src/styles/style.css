@@ -177,8 +177,7 @@ nav .profile-area .profile-area {
 }
 
 .room-list-item {
-  width: 80%;
-  height: 50px;
+  width: 250px;
   margin: 10px 20px;
   padding: 0.2rem 1rem;
   border: 1px solid black;

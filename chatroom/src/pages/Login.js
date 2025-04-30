@@ -193,8 +193,8 @@ const Login = () => {
                     className="sr-only" 
                     style={{fontSize: "1.5rem",margin: "1rem 1rem"}}
                 >
-                    <label style={{color: "#f7c37e"}}>Email </label>
-                    <label>address</label> 
+                    <label style={{color: "#f7c37e"}}>Email address</label>
+                    {/* <label>Email address</label>  */}
                 </label>
                 <input
                     type="email"
@@ -211,8 +211,8 @@ const Login = () => {
                         className="sr-only" 
                         style={{fontSize: "1.5rem",margin: "1rem 1rem"}}
                 >
-                    <label>Pass</label>
-                    <label style={{color: "#f7c37e"}}>word</label>
+                    <label>Password</label>
+                    {/* <label style={{color: "#f7c37e"}}>word</label> */}
                     {/* Password */}
                 </label>
                 <input

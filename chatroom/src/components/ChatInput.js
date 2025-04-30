@@ -69,7 +69,7 @@ const ChatInput = () => {
     };
 
     const handleUnsend = async (msgId) => {
-      const updatedMessages = allmessages.filter(msg => msg.id !== msgId);
+      const updatedMessages = allmessages.filter(msg => msg.key !== msgId);
 
         // Delete the message from the database
         console.log("Message unsent:", msgId);
@@ -90,35 +90,37 @@ const ChatInput = () => {
     return (
       <div className="chat-container">
         <div className="msg">
-          {allmessages.map((msgObj) => (
-            <div
-            key={msgObj.id}
-            className={
-              msgObj.sender === auth.currentUser.email
-                ? 'my-message'
-                : msgObj.sender === 'EchoBot HAHA 🤖'
-                ? 'bot-message'
-                : 'other-message'
-            }
-          >
-              <div className="msg-header" style={{display:"flex", justifyContent:"space-between", fontSize:"1.2rem",}}>
-                <span>{new Date(msgObj.time).toLocaleTimeString()}</span>
-                <button style={{background:"none", border:"none"}}>
-                  {/* FontAwesome 好像會汙染到整個東西 ! */}
-                  {/* {msgObj.sender === auth.currentUser.email && <FontAwesomeIcon icon={faTrash} className='trash-icon' />} */}
-                  {/* {window.location.pathname !== "/login" && auth.currentUser && msgObj && msgObj.sender === auth.currentUser.email && (
-                    <FontAwesomeIcon icon={faTrash} className='trash-icon' />
-                  )} */}
 
+        {auth.currentUser && 
+          allmessages.map((msgObj) => (
+            <div
+              key={msgObj.key}
+              className={
+                msgObj.sender === auth.currentUser.email
+                  ? 'my-message'
+                  : msgObj.sender === 'EchoBot HAHA 🤖'
+                  ? 'bot-message'
+                  : 'other-message'
+              }
+            >
+              <div className="msg-header" style={{ display: "flex", justifyContent: "space-between", fontSize: "1.2rem" }}>
+                <span>{new Date(msgObj.time).toLocaleTimeString()}</span>
+                <button style={{ background: "none", border: "none" }}>
                   {msgObj.sender === auth.currentUser.email && (
-                    <HoverTrashIcon onClick={() => handleUnsend(msgObj.id)} />
+                    <HoverTrashIcon onClick={() => handleUnsend(msgObj.key)} />
                   )}
                 </button>
               </div>
 
-              <div style={{fontSize:"1.25rem"}}>{msgObj.sender === auth.currentUser.email ? auth.currentUser.displayName : msgObj.sender}: {msgObj.msg}</div>
+              <div style={{ fontSize: "1.25rem" }}>
+                {msgObj.sender === auth.currentUser.email
+                  ? (auth.currentUser.displayName || auth.currentUser.email)
+                  : msgObj.sender}
+                : {msgObj.msg}
+              </div>
             </div>
-          ))}
+          ))
+        }
         </div>
         <div className="input-msg">
         <input

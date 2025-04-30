@@ -83,8 +83,19 @@ const RoomList = () => {
             alert("Please enter a valid email !");
             return;
         }
-        await addUserToChatroom(roomId, email);
-        alert(`Invite ${email} to room ${roomId} successfully!`);
+        try {
+            const result = await addUserToChatroom(roomId, email);
+            if (result === true) {
+              alert(`Invited ${email} to room successfully!`);
+            } 
+            else {
+              alert(`Failed to invite ${email}. Reason: ${result}`);
+            }
+          } 
+          catch (error) {
+            alert(`Error inviting user: ${error.message}`);
+          }
+       
         // console.log("Invite user to room = ", roomId, email);
     }
 
@@ -211,6 +222,7 @@ const RoomList = () => {
                 ))} */}
                 <h3 style={{width:"100%"}}>Your Rooms</h3>
 
+                {auth.currentUser &&                 
                 <div style={{overflowY: "scroll", maxHeight: "430px"}}>
                     {rooms.filter((room) => room.members.includes(encodeEmail(auth.currentUser.email)))
                         .map((room) => (
@@ -230,7 +242,8 @@ const RoomList = () => {
                                 <h4>{room.name}</h4>
                             </button>
                         ))}
-                </div>
+                </div>}
+
 
             </div>
 

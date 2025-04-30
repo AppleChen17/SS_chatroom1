@@ -120,7 +120,7 @@ const createChatroom = async (name) => {
         name: name,
         Members: {}, // use [EMAIL] = true !
         Message: {}, // use push(newMsg) -> get unique Id and store the text, sender, time...
-        id: newroomRef.key, 
+        key: newroomRef.key, 
     });
 
     // CONTINUE USE THE UNIQUE KEY to add members !
@@ -130,10 +130,10 @@ const createChatroom = async (name) => {
 
 const addUserToChatroom = async (roomID, email) => {
     const result = await checkUserExists(email);
-    if(!result) 
+    if(!result)
     {
         alert("not a user in this chatroom web");
-        return;
+        return false;
     }
 
     const roomMemRef = ref(database, `chatrooms/${roomID}/members`);
@@ -148,6 +148,7 @@ const addUserToChatroom = async (roomID, email) => {
     const roomName = snapshot.exists() ? snapshot.val() : "(unknown)";
 
     console.log(`User ${email} added to chatroom ${roomName}`);
+    return true;
 }
 
 const createMessage = async(roomID,text,email) => {
@@ -158,7 +159,7 @@ const createMessage = async(roomID,text,email) => {
         msg: text,
         sender: email,
         time: Date.now(),
-        id: newMsgRef.key,
+        key: newMsgRef.key,
     });
     console.log("Message key:", newMsgRef.key, "roomid = " ,roomID);
     return newMsgRef.key;
@@ -173,7 +174,7 @@ const loadMessage = async (roomID) => {
     {
       const messages = Object.entries(snapshot.val()) // to array !
         .map(([key, value]) => ({
-          id: key,        
+          key: key,        
           sender: value.sender,
           time: value.time, 
           msg: value.msg,
