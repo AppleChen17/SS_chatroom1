@@ -3,7 +3,7 @@ import RoomList from '../components/RoomList';
 import ChatInput from '../components/ChatInput';
 import Navbar from '../components/Navbar';
 import { database } from '../config'; 
-import { get, push, ref, set, update, remove} from "firebase/database";
+import { get, ref,} from "firebase/database";
 import { useRoom } from '../RoomContext';
 
 const Chatroom = () => {
@@ -55,16 +55,16 @@ const Chatroom = () => {
             <Navbar />
             <div className="chatroom">
                 <div className="chatroom-list">
-                <h2 className="section-header"> Chatroom List </h2>
-                <div className="scrollable">
-                    <RoomList />
-                </div>
+                    <h2 className="section-header"> Chatroom List </h2>
+                    <div className="scrollable">
+                        <RoomList />
+                    </div>
                 </div>
                 <div className="chatroom-main">
-                <h2 className="section-header">{roomName}</h2>
-                <div className="scrollable">
-                    <ChatInput />
-                </div>
+                    <h2 className="section-header">{roomName}</h2>
+                    <div className="scrollable">
+                        <ChatInput />
+                    </div>
                 </div>
             </div>
         </div>

@@ -100,19 +100,7 @@ background-color: "#433232a6";
     transform: translate(0%, 0px);
   }
 }
-// @keyframes bounce {
-//   100% {
-//       top: -20px;
-//       text-shadow: 0 1px 0 #ccc,
-//                    0 2px 0 #ccc,
-//                    0 3px 0 #ccc,
-//                    0 4px 0 #ccc,
-//                    0 5px 0 #ccc,
-//                    0 6px 0 #ccc,
-//                    0 7px 0 #ccc,
-//                    0 8px 0 #ccc;
-//   }
-// }
+
 
 nav {
     text-decoration: none;
@@ -335,13 +323,28 @@ nav {
     overflow-y: auto;  // Allow vertical scrolling when content overflows
     max-height: 650px;  // Set a fixed height to control the scroll area
     flex-grow: 1;  // Allow the chat area to expand and take remaining space
-  
+
+    // .msg-header {
+    //   display: flex;
+    //   justify-content: space-between;
+    //   font-size: 1.2rem;
+    //   // align-items: center;
+    //   // margin-bottom: 5px;
+
+    //   .trash-icon {
+    //     &:hover
+    //     {
+    //       color: red;
+    //     }
+    //   }
+    // }
     .my-message {
       align-self: flex-end;  // Align to the right
       background-color: #d1e7dd;
       padding: 10px;
       border-radius: 10px;
       max-width: 70%;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
   
     .other-message {
@@ -350,9 +353,23 @@ nav {
       padding: 10px;
       border-radius: 10px;
       max-width: 70%;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .bot-message {
+      align-self: flex-start;  // Align to the left
+      background-color: #FAEBD7;
+      padding: 10px;
+      border-radius: 10px;
+      max-width: 70%;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
   }
 
+.active-room {
+    background-color: #787878;
+    color: white;
+  }
   
   /* Input message area */
   .input-msg {
@@ -401,6 +418,7 @@ nav {
     flex-direction: column;
     border-right: 2px solid #ccc;
     background-color: #ffffff;
+    overflow: hidden; /* Important to constrain the inner scroll */
   }
   
   /* Main Chat */

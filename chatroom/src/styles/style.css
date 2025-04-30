@@ -220,6 +220,7 @@ nav .profile-area .profile-area {
   padding: 10px;
   border-radius: 10px;
   max-width: 70%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 .msg .other-message {
   align-self: flex-start;
@@ -227,6 +228,20 @@ nav .profile-area .profile-area {
   padding: 10px;
   border-radius: 10px;
   max-width: 70%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.msg .bot-message {
+  align-self: flex-start;
+  background-color: #FAEBD7;
+  padding: 10px;
+  border-radius: 10px;
+  max-width: 70%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.active-room {
+  background-color: #787878;
+  color: white;
 }
 
 /* Input message area */
@@ -273,6 +288,7 @@ nav .profile-area .profile-area {
   flex-direction: column;
   border-right: 2px solid #ccc;
   background-color: #ffffff;
+  overflow: hidden; /* Important to constrain the inner scroll */
 }
 
 /* Main Chat */

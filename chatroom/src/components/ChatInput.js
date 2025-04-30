@@ -5,10 +5,12 @@ import "../styles/style.css"
 import { createMessage } from '../DBfunc'; 
 import { useRoom } from '../RoomContext'; // useRoom => get the room id ! (is a HOOK !!!)
 import { auth,database } from '../config'; 
+import { ref, remove } from "firebase/database";
 import { loadMessage } from '../DBfunc';
 import ReactDOM from 'react-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPaperPlane } from '@fortawesome/free-solid-svg-icons' // import icon from fontawesome
+import { faTrash } from '@fortawesome/free-solid-svg-icons'
+import HoverTrashIcon from './HoverTrashIcon';
 
 const ChatInput = () => {
     const { selectedRoomId } = useRoom();
@@ -66,29 +68,82 @@ const ChatInput = () => {
         }
     };
 
+    const handleUnsend = async (msgId) => {
+      const updatedMessages = allmessages.filter(msg => msg.id !== msgId);
+
+        // Delete the message from the database
+        console.log("Message unsent:", msgId);
+        try {
+          const messageRef = ref(database, `chatrooms/${selectedRoomId}/Message/${msgId}`);
+          await remove(messageRef);
+          console.log("Message removed:", msgId);
+        } 
+        catch (error) {
+            console.error("Remove failed:", error);
+        }
+
+      setallMessages(updatedMessages);
+    }
+
+    // const [isHovered, setIsHovered] = useState(false);
+
     return (
       <div className="chat-container">
         <div className="msg">
           {allmessages.map((msgObj) => (
-            <div key={msgObj.key} className={msgObj.sender === auth.currentUser.email ? 'my-message' : 'other-message'}>
-              <span>{new Date(msgObj.time).toLocaleTimeString()}</span>
+            <div
+            key={msgObj.id}
+            className={
+              msgObj.sender === auth.currentUser.email
+                ? 'my-message'
+                : msgObj.sender === 'EchoBot HAHA 🤖'
+                ? 'bot-message'
+                : 'other-message'
+            }
+          >
+              <div className="msg-header" style={{display:"flex", justifyContent:"space-between", fontSize:"1.2rem",}}>
+                <span>{new Date(msgObj.time).toLocaleTimeString()}</span>
+                <button style={{background:"none", border:"none"}}>
+                  {/* FontAwesome 好像會汙染到整個東西 ! */}
+                  {/* {msgObj.sender === auth.currentUser.email && <FontAwesomeIcon icon={faTrash} className='trash-icon' />} */}
+                  {/* {window.location.pathname !== "/login" && auth.currentUser && msgObj && msgObj.sender === auth.currentUser.email && (
+                    <FontAwesomeIcon icon={faTrash} className='trash-icon' />
+                  )} */}
+
+                  {msgObj.sender === auth.currentUser.email && (
+                    <HoverTrashIcon onClick={() => handleUnsend(msgObj.id)} />
+                  )}
+                </button>
+              </div>
+
               <div style={{fontSize:"1.25rem"}}>{msgObj.sender === auth.currentUser.email ? auth.currentUser.displayName : msgObj.sender}: {msgObj.msg}</div>
             </div>
           ))}
         </div>
         <div className="input-msg">
-          <input
-            type="text"
-            value={newMessage}
-            onChange={(e) => setNewMessage(e.target.value)}
-            placeholder="Type a message : D"
-            style={{fontSize: "1.25rem",}}
-          />
-          <button type="button" className="btn btn-primary" onClick={handleSend}>
-            {/* <i className="bi bi-send-fill"></i>Send */}
-            <img className='send' src="/paper-plane-regular.svg" alt="send"  />
-            {/* <FontAwesomeIcon icon="fa-solid fa-paper-plane" /> */}
-          </button>
+        <input
+          type="text"
+          value={newMessage}
+          onChange={(e) => setNewMessage(e.target.value)}
+          placeholder="Type a message : D"
+          disabled={!selectedRoomId}
+          style={{ fontSize: "1.25rem" }}
+        />
+        <button
+          type="button"
+          className="btn btn-primary"
+          onClick={() => {
+            if (!selectedRoomId) 
+            {
+              alert("Choose a room first!");
+              return;
+            }
+            handleSend();
+          }}
+          disabled={!selectedRoomId}
+        >
+          <img className="send" src="/paper-plane-regular.svg" alt="send" />
+        </button>
         </div>
       </div>
   );

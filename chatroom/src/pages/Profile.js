@@ -75,7 +75,7 @@ const Profile = () => {
       await updateAuth(username, email, photoURL);
       await updateFirebase(phone, addr);
       alert("Profile updated successfully!");
-    } 
+    }
     catch (error) {
       alert("Error updating profile:", error);
     }

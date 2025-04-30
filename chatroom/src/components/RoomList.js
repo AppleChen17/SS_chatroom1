@@ -50,8 +50,7 @@ const RoomList = () => {
         try {
             const roomID = await createChatroom(name); 
             await addUserToChatroom(roomID, auth.currentUser.email); // 將當前用戶添加到聊天室
-
-        } 
+        }
         catch (error) {
             console.error("Create chatroom ERROR:", error);
         }
@@ -74,6 +73,19 @@ const RoomList = () => {
             return;
         }
         await createRoom(newRoomName);
+    }
+
+    const handleInvite = async (roomId, email) => {
+        setShowInvite(false);
+        setNewInviteEmail("");
+        if(email.trim() === "") 
+        {
+            alert("Please enter a valid email !");
+            return;
+        }
+        await addUserToChatroom(roomId, email);
+        alert(`Invite ${email} to room ${roomId} successfully!`);
+        // console.log("Invite user to room = ", roomId, email);
     }
 
     return (
@@ -169,7 +181,7 @@ const RoomList = () => {
                                 style={{display: "inline"}}
                             />
                             <button 
-                                onClick={() => addUserToChatroom(selectedRoomId,newInviteEmail)}
+                                onClick={() => handleInvite(selectedRoomId,newInviteEmail)}
                                 style={{backgroundColor:"#F4D4AA",padding:"2px 5px",margin:"2px 2px",
                                     borderRadius:"10px", border:"none",fontFamily: "Lexend Deca",}}
                             >
@@ -191,7 +203,7 @@ const RoomList = () => {
 
 
             {/* render list */}
-            <div className="room-list">
+            <div className="room-list" >
                 {/* {rooms.map((room) => (
                     <button key={room.id} className="room-list-item" onClick={() => handleRoomClick(room.id)}>
                         <h2>{room.name}</h2>
@@ -199,21 +211,30 @@ const RoomList = () => {
                 ))} */}
                 <h3 style={{width:"100%"}}>Your Rooms</h3>
 
-                {rooms.filter((room) => room.members.includes(encodeEmail(auth.currentUser.email)))
-                    .map((room) => (
-                        <button
-                            key={room.id}
-                            className="room-list-item"
-                            // !!! IMPORTANT !!! 把這個 onclick 掛在這裡可以取得他的 room.id!!!!!!
-                            onClick={() => handleRoomClick(room.id)}
-                        >
-                            <h4>{room.name}</h4>
-                        </button>
-                    ))}
+                <div style={{overflowY: "scroll", maxHeight: "430px"}}>
+                    {rooms.filter((room) => room.members.includes(encodeEmail(auth.currentUser.email)))
+                        .map((room) => (
+                            // <button
+                            //     key={room.id}
+                            //     className="room-list-item"
+                            //     // !!! IMPORTANT !!! 把這個 onclick 掛在這裡可以取得他的 room.id!!!!!!
+                            //     onClick={() => handleRoomClick(room.id)}
+                            // >
+                            //     <h4>{room.name}</h4>
+                            // </button>
+                            <button
+                                key={room.id}
+                                className={`room-list-item ${selectedRoomId === room.id ? 'active-room' : ''}`}
+                                onClick={() => handleRoomClick(room.id)}
+                            >
+                                <h4>{room.name}</h4>
+                            </button>
+                        ))}
+                </div>
+
             </div>
 
-
-
+            {/* <div style={{height:"300px"}}>hi</div> */}
         </div>
     );
 };
