@@ -54,13 +54,13 @@ const Chatroom = () => {
             <Navbar />
             <div className="chatroom">
                 <div className="chatroom-list">
-                    <h2 className="section-header"> Chatroom List </h2>
+                    <h5 className="section-header"> Chatroom List </h5>
                     <div className="scrollable">
                         <RoomList />
                     </div>
                 </div>
                 <div className="chatroom-main">
-                    <h2 className="section-header">{roomName}</h2>
+                    <h5 className="section-header">{roomName}</h5>
                     <div className="scrollable">
                         <ChatInput />
                     </div>

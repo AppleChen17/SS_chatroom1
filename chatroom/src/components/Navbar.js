@@ -75,7 +75,7 @@ const Navbar = () => {
               alt="photo" 
               style={{ width: "40px", height: "40px", borderRadius: "50%" }} 
           />
-          <h4>{user}</h4>
+          <h6>{user}</h6>
         </Dropdown.Toggle>
 
         <Dropdown.Menu >

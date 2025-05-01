@@ -1,18 +1,8 @@
-@charset "UTF-8";
 @import url("https://fonts.googleapis.com/css2?family=Lexend+Deca&family=Nunito&display=swap");
 * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-}
-
-html {
-  font-size: 16px; /* 設置根字體大小 */
-}
-
-html, body {
-  transform: none !important;
-  zoom: 1 !important;
 }
 
 h1,
@@ -26,8 +16,8 @@ h6 {
 }
 
 .bell {
-  width: 50px;
-  height: 50px;
+  width: 30px;
+  height: 30px;
   background-color: "#433232a6";
 }
 .bell:hover {
@@ -39,6 +29,7 @@ h6 {
   text-transform: uppercase;
   display: inline-block;
   animation: bounce 1s ease-in-out infinite;
+  font-size: 1.5rem;
 }
 
 @keyframes bounce {
@@ -76,14 +67,14 @@ nav {
   display: flex;
   background-color: rgb(251, 179, 153);
   justify-content: space-between;
-  height: 100px;
+  height: 60px;
   box-shadow: rgba(149, 157, 165, 0.5) 0px 3px 10px;
 }
 nav div {
   margin: auto 0.5rem;
 }
 nav div h1 {
-  font-size: 2.5rem;
+  font-size: 1.5rem;
   animation: come-in-left-bounce 1s ease;
 }
 nav .profile-area {
@@ -101,11 +92,13 @@ nav .profile-area button img {
 }
 nav .profile-area .profile {
   text-align: right;
-  font-size: 1.5rem;
+  font-size: 1rem;
   white-space: nowrap;
+  margin: auto 0rem;
+  padding: 0 0;
 }
 nav .profile-area .profile .drop-item {
-  font-size: 1.2rem;
+  font-size: 1rem;
   font-family: Lexend Deca;
   font-weight: normal;
 }
@@ -114,6 +107,7 @@ nav .profile-area #dropdown-basic {
   align-items: center;
   justify-content: flex-end;
   width: 100%;
+  max-height: 60px;
   overflow: visible;
   white-space: nowrap;
   font-size: 2.5rem;
@@ -187,7 +181,7 @@ nav .profile-area .profile-area {
 }
 
 .room-list-item {
-  width: 250px;
+  width: 230px;
   margin: 10px 20px;
   padding: 0.2rem 1rem;
   border: 1px solid black;
@@ -220,7 +214,7 @@ nav .profile-area .profile-area {
   padding: 10px;
   font-family: "Lexend Deca", sans-serif;
   overflow-y: auto;
-  max-height: 650px;
+  max-height: 400px;
   flex-grow: 1;
 }
 .msg .my-message {
@@ -262,13 +256,13 @@ nav .profile-area .profile-area {
 }
 .input-msg input {
   width: 80%;
-  padding: 10px;
+  padding: 6px;
   border-radius: 20px;
   border: 1px solid #ccc;
   margin-right: 5px;
 }
 .input-msg button {
-  padding: 10px 15px;
+  padding: 7px 10px;
   border: none;
   background-color: #b4d6fa;
   color: white;
@@ -335,10 +329,14 @@ nav .profile-area .profile-area {
   .chatroom-main {
     flex: 1;
   }
+  .room-list-item {
+    width: 200px;
+  }
 }
 .profile-container {
   max-width: 500px;
   margin: 1rem auto;
+  height: 500px;
   padding: 2rem;
   background: rgba(251, 179, 153, 0.5);
   border-radius: 10px;
@@ -359,7 +357,7 @@ nav .profile-area .profile-area {
 .profile-container button {
   display: block;
   width: 100%;
-  padding: 0.75rem;
+  padding: 0.5rem;
   font-size: 1rem;
   background-color: #007bff;
   color: white;
@@ -373,17 +371,19 @@ nav .profile-area .profile-area {
 }
 .profile-container input {
   width: 100%;
+  height: 30px;
   padding: 0.5rem;
-  font-size: 1.2rem;
+  font-size: 0.8rem;
   border: 1px solid #ccc;
   border-radius: 5px;
 }
 .profile-container label {
   display: block;
   font-weight: bold;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.2rem;
+  font-size: 0.8rem;
 }
 
 .profile-container div {
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
 }/*# sourceMappingURL=style.css.map */

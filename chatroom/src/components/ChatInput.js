@@ -92,33 +92,33 @@ const ChatInput = () => {
       <div className="chat-container">
         <div className="msg">
 
-        {auth.currentUser && 
-          allmessages.map((msgObj) => (
-            <div
-              key={msgObj.key}
-              className={
-                msgObj.sender === auth.currentUser.email
-                  ? 'my-message'
-                  : msgObj.sender === 'EchoBot HAHA 🤖'
-                  ? 'bot-message'
-                  : 'other-message'
-              }
-            >
-              <div className="msg-header" style={{ display: "flex", justifyContent: "space-between", fontSize: "1.2rem" }}>
-                <span>{new Date(msgObj.time).toLocaleTimeString()}</span>
-                <button style={{ background: "none", border: "none" }}>
-                  {msgObj.sender === auth.currentUser.email && (
-                    <HoverTrashIcon onClick={() => handleUnsend(msgObj.key)} />
-                  )}
-                </button>
-              </div>
+          {auth.currentUser && 
+            allmessages.map((msgObj) => (
+              <div
+                key={msgObj.key}
+                className={
+                  msgObj.sender === auth.currentUser.email
+                    ? 'my-message'
+                    : msgObj.sender === 'EchoBot HAHA 🤖'
+                    ? 'bot-message'
+                    : 'other-message'
+                }
+              >
+                <div className="msg-header" style={{ display: "flex", justifyContent: "space-between", fontSize: "0.7rem" }}>
+                  <span>{new Date(msgObj.time).toLocaleTimeString()}</span>
+                  <button style={{ background: "none", border: "none" }}>
+                    {msgObj.sender === auth.currentUser.email && (
+                      <HoverTrashIcon onClick={() => handleUnsend(msgObj.key)} />
+                    )}
+                  </button>
+                </div>
 
-              <div style={{ fontSize: "1.25rem" }}>
-                {msgObj.sender === auth.currentUser.email
-                  ? (auth.currentUser.displayName || auth.currentUser.email)
-                  : msgObj.sender}
-                : {msgObj.msg}
-              </div>
+                <div style={{ fontSize: "0.8rem" }}>
+                  {msgObj.sender === auth.currentUser.email
+                    ? (auth.currentUser.displayName || auth.currentUser.email)
+                    : msgObj.sender}
+                  : {msgObj.msg}
+                </div>
             </div>
           ))
         }
@@ -130,7 +130,7 @@ const ChatInput = () => {
           onChange={(e) => setNewMessage(e.target.value)}
           placeholder="Type a message : D"
           disabled={!selectedRoomId}
-          style={{ fontSize: "1.25rem" }}
+          style={{ fontSize: "0.8rem" }}
         />
         <button
           type="button"
@@ -145,7 +145,7 @@ const ChatInput = () => {
           }}
           disabled={!selectedRoomId}
         >
-          <img className="send" src="/paper-plane-regular.svg" alt="send" />
+          <img className="send" src="/paper-plane-regular.svg" alt="send" style={{width:"15px",height:"15px",}}/>
         </button>
         </div>
       </div>

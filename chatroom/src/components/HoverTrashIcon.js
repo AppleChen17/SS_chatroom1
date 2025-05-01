@@ -10,7 +10,7 @@ const HoverTrashIcon = ({ onClick }) => {
         onClick={onClick}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
-        style={{ width: "25px", height: "25px", cursor: "pointer" }}
+        style={{ width: "15px", height: "15px", cursor: "pointer" }}
       />
     );
 };

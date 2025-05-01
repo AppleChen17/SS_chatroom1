@@ -87,13 +87,13 @@ const Profile = () => {
       <Navbar />
       <div className="profile-container">
         
-        <h1>Profile</h1>
+        <h1 style={{fontSize:"1.5rem"}}>Profile</h1>
         {/* <h3>Welcome to your profile!</h3> */}
         <img 
           src={photoURL || "/user-3296.svg"} 
           alt="User Profile" 
-          width="100" 
-          height="100" 
+          width="75px" 
+          height="75px" 
           style={{ borderRadius: "50%" }}
         />
 

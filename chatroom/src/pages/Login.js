@@ -160,22 +160,22 @@ const Login = () => {
         >
             <div 
                 className="login-area"
-                style={{  backgroundColor: "#433232a6",
+                style={{  backgroundColor: "#4332326",
                     textAlign: "center",
-                    width: "600px",
+                    width: "450px",
                     padding: "30px",
                     borderRadius: "10px",
                     marginTop: "100px",
-                    height: "600px",
+                    height: "400px",
                 }}
             >
 
                 {/* className="my-element" */}
                 <h1 className="login">
                     {/* ref: https://www.youtube.com/shorts/AUafNbgATw8 */}
-                    <span className="L" style={{color: "#f7c37e", animationDelay: "0s"}}>L</span>
-                    <span className="o" style={{color: "#f7c37e", animationDelay: "0.1s"}}>o</span>
-                    <span className="g" style={{color: "#f7c37e", animationDelay: "0.2s"}}>g</span>
+                    <span className="L" style={{animationDelay: "0s"}}>L</span>
+                    <span className="o" style={{animationDelay: "0.1s"}}>o</span>
+                    <span className="g" style={{animationDelay: "0.2s"}}>g</span>
                     <span className="i" style={{animationDelay: "0.3s"}}>i</span>
                     <span className="n" style={{animationDelay: "0.4s"}}>n</span>
                     {/* Login */}
@@ -187,14 +187,15 @@ const Login = () => {
                     onClick={requestPermission}
                     />
                 </button>
-                <h4>Please enter your credentials to log in.</h4>
+                <h6>Please enter your credentials to log in.</h6>
 
                 <label htmlFor="inputEmail" 
                     className="sr-only" 
-                    style={{fontSize: "1.5rem",margin: "1rem 1rem"}}
+                    style={{fontSize: "1rem",margin: "0.2rem 0.2rem"}}
                 >
-                    <label style={{color: "#f7c37e"}}>Email address</label>
+                    <label >Email address</label>
                     {/* <label>Email address</label>  */}
+                    {/* style={{color: "#f7c37e"}} */}
                 </label>
                 <input
                     type="email"
@@ -209,7 +210,7 @@ const Login = () => {
 
                 <label htmlFor="inputPassword" 
                         className="sr-only" 
-                        style={{fontSize: "1.5rem",margin: "1rem 1rem"}}
+                        style={{fontSize: "1rem",margin: "0.2rem 0.2rem"}}
                 >
                     <label>Password</label>
                     {/* <label style={{color: "#f7c37e"}}>word</label> */}
@@ -225,24 +226,24 @@ const Login = () => {
                 />
 
                 <div className="btns">
-                    <button className="btn btn-lg btn-primary btn-block mb-3" 
+                    <button className="btn btn-lg btn-primary btn-block mb-2" 
                         id="btnLogin"
-                        style={{ display: "block",width: "100%", margin: "15px 0", }}
+                        style={{ display: "block",width: "100%", margin: "10px 0px", fontSize: "1rem", }}
                         onClick={() => handleSignin(email,password)}
                     >
                         Sign in
                     </button>
 
-                    <button className="btn btn-lg btn-info btn-block mb-3" 
+                    <button className="btn btn-lg btn-info btn-block mb-2" 
                         id="btngoogle"
-                        style={{ display: "block",width: "100%", margin: "15px 0", }}
+                        style={{ display: "block",width: "100%", fontSize: "1rem" }}
                         onClick={handleGoogle}>
                         Sign in with Google
                     </button>
 
-                    <button className="btn btn-lg btn-secondary btn-block mb-3" 
+                    <button className="btn btn-lg btn-secondary btn-block mb-22" 
                             id="btnSignUp"
-                            style={{ display: "block",width: "100%", margin: "15px 0", }}
+                            style={{ display: "block",width: "100%", fontSize: "1rem" }}
                             onClick={() => handleSignup(email,password)}>
                         New account
                     </button>

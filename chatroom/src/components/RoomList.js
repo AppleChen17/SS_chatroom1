@@ -107,20 +107,20 @@ const RoomList = () => {
             >
                 {/* default row flex */}
                 <div
-                    style={{ display: "flex", alignItems:"center", flexWrap: "wrap"}}>
-                    <h3 style={{width:"100%"}}>Functions</h3>
+                    style={{ display: "flex", alignItems:"center", justifyContent:"center", flexWrap: "wrap"}}>
+                    <h5 style={{width:"100%"}}>Functions</h5>
                     <button 
                         className='func-btn' 
                         onClick={() => setShowInput(true)}
                         style={{ margin: "10px 10px", 
                             width:"100%", 
-                            height: "50px", 
+                            height: "40px", 
                             backgroundColor: "#FAEBD7", 
                             color: "black", 
                             borderRadius: "5px", 
                             border: "none", 
                             cursor: "pointer",
-                            fontSize: "1.2rem",
+                            fontSize: "1rem",
                             fontFamily: "Lexend Deca",
                             // fontWeight: "bold",
                         }}
@@ -139,12 +139,12 @@ const RoomList = () => {
                                 placeholder="Enter chatroom name"
                                 value={newRoomName}
                                 onChange={(e) => setNewRoomName(e.target.value)}
-                                style={{display: "inline"}}
+                                style={{display: "inline", fontSize: "0.7rem", marginRight:"3px"}}
                             />
                             <button 
                                 onClick={async () => handleCreateRoom(newRoomName)}
                                 style={{backgroundColor:"#F4D4AA",padding:"2px 5px",margin:"2px 2px",
-                                    borderRadius:"10px", border:"none",fontFamily: "Lexend Deca",
+                                    borderRadius:"10px", border:"none",fontFamily: "Lexend Deca",fontSize:"0.7rem",
                                 }}
                             >
                                     Create
@@ -152,7 +152,7 @@ const RoomList = () => {
                             <button 
                                 onClick={() => setShowInput(false)}
                                 style={{backgroundColor:"#F4D4AA",padding:"2px 5px",margin:"2px 2px",
-                                     borderRadius:"10px", border:"none",fontFamily: "Lexend Deca",}}
+                                     borderRadius:"10px", border:"none",fontFamily: "Lexend Deca",fontSize:"0.7rem"}}
                             >
                                 Cancel
                             </button>
@@ -161,20 +161,20 @@ const RoomList = () => {
                 </div>
 
 
-                <div style={{ display: "flex", alignItems:"center", flexWrap: "wrap"}}>
+                <div style={{ display: "flex", alignItems:"center", justifyContent:"center", flexWrap: "wrap"}}>
                     <button 
                         className='func-btn' 
                         onClick={() => setShowInvite(true)}
                         style={{ margin: "10px 10px", 
                             // width:"150px", 
                             width: "100%",
-                            height: "50px", 
+                            height: "40px", 
                             backgroundColor: "#FAEBD7", 
                             color: "black", 
                             borderRadius: "5px", 
                             border: "none", 
                             cursor: "pointer",
-                            fontSize: "1.2rem",
+                            fontSize: "1rem",
                             fontFamily: "Lexend Deca",
                         }}
                     >
@@ -189,12 +189,12 @@ const RoomList = () => {
                                 placeholder="Enter email to invite"
                                 value={newInviteEmail}
                                 onChange={(e) => setNewInviteEmail(e.target.value)}
-                                style={{display: "inline"}}
+                                style={{display: "inline", fontSize: "0.7rem", marginRight:"5px"}}
                             />
                             <button 
                                 onClick={() => handleInvite(selectedRoomId,newInviteEmail)}
                                 style={{backgroundColor:"#F4D4AA",padding:"2px 5px",margin:"2px 2px",
-                                    borderRadius:"10px", border:"none",fontFamily: "Lexend Deca",}}
+                                    borderRadius:"10px", border:"none",fontFamily: "Lexend Deca",fontSize:"0.7rem"}}
                             >
                                 Invite
                             </button>
@@ -202,7 +202,7 @@ const RoomList = () => {
                             <button 
                                 onClick={() => setShowInvite(false)}
                                 style={{backgroundColor:"#F4D4AA",padding:"2px 5px",margin:"2px 2px",
-                                    borderRadius:"10px", border:"none",fontFamily: "Lexend Deca",}}
+                                    borderRadius:"10px", border:"none",fontFamily: "Lexend Deca",fontSize:"0.7rem"}}
                             >
                                     Cancel
                             </button>
@@ -220,10 +220,10 @@ const RoomList = () => {
                         <h2>{room.name}</h2>
                     </button>
                 ))} */}
-                <h3 style={{width:"100%"}}>Your Rooms</h3>
+                <h5 style={{width:"95%"}}>Your Rooms</h5>
 
                 {auth.currentUser &&                 
-                <div style={{overflowY: "scroll", maxHeight: "430px"}}>
+                <div style={{overflowY: "scroll", maxHeight: "225px"}}>
                     {rooms.filter((room) => room.members.includes(encodeEmail(auth.currentUser.email)))
                         .map((room) => (
                             // <button
@@ -239,7 +239,7 @@ const RoomList = () => {
                                 className={`room-list-item ${selectedRoomId === room.id ? 'active-room' : ''}`}
                                 onClick={() => handleRoomClick(room.id)}
                             >
-                                <h4>{room.name}</h4>
+                                <h6>{room.name}</h6>
                             </button>
                         ))}
                 </div>}
