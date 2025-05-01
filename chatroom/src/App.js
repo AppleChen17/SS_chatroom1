@@ -8,6 +8,7 @@ import ChatInput from './components/ChatInput';
 import RoomList from './components/RoomList';
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./config";
+import { useRoom } from './RoomContext'; 
 
 function App() {
 
@@ -17,15 +18,32 @@ function App() {
 
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true); 
+  const { setSelectedRoomId } = useRoom();
+
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
       setLoading(false);
+      setSelectedRoomId(null); // 清除 roomId
     });
-
     return () => unsubscribe();
   }, []);
+  
+  useEffect(() => {
+    if (loading) return;
+    if (!user && location.pathname !== "/") {
+      navigate("/");
+    }
+  }, [user, loading, location, navigate]);
+  // useEffect(() => {
+  //   const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+  //     setUser(currentUser);
+  //     setLoading(false);
+  //   });
+
+  //   return () => unsubscribe();
+  // }, []);
 
   // if (loading) return <div>Loading...</div>;
   // 這可能讓 Hook 沒機會執行到 => 會報錯 !!!!!!
@@ -35,13 +53,13 @@ function App() {
   //     navigate("/");
   //   }
   // }, [user, location, navigate]);
-  useEffect(() => {
-    if (loading) return; // Wait until loading is done
+  // useEffect(() => {
+  //   if (loading) return; // Wait until loading is done
   
-    if (!user && location.pathname !== "/") {
-      navigate("/");
-    }
-  }, [user, location, navigate, loading]);
+  //   if (!user && location.pathname !== "/") {
+  //     navigate("/");
+  //   }
+  // }, [user, location, navigate, loading]);
 
   if (loading) return <div>Loading...</div>;
 

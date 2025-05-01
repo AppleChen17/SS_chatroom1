@@ -31,12 +31,13 @@ const Login = () => {
   
     //   return () => unsubscribe();
     // }, []);
+
     // const { setSelectedRoomId } = useRoom(); // get the room id ! (is a HOOK !!!)
     // // setSelectedRoomId(null);
     // useEffect(() => {
-    //     const unsubscribe = onAuthStateChanged(auth, (user) => {
+    //     const unsubscribe = onAuthStateChanged(auth,async (user) => {
     //       console.log("user changed:", user?.email);
-    //       setSelectedRoomId(null);
+    //       await setSelectedRoomId(null);
     //     });
       
     //     return () => unsubscribe(); 
@@ -80,7 +81,7 @@ const Login = () => {
     const handleSignin = (email,password) => {
         console.log("sign in !");
         console.log(email, password);
-
+        setSelectedRoomId(null); // 重設聊天室
         signInWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
             // Signed in    
@@ -103,7 +104,7 @@ const Login = () => {
     const handleSignup = (email,password) => {
         console.log("sign up new account !");
         console.log(email, password);
-
+        setSelectedRoomId(null); // 重設聊天室
 
         // is A 獨立函數 (是從 firebase 內導入的獨立函數)，auth 作為第一個參數傳給他就好 !
         createUserWithEmailAndPassword(auth,email, password)
@@ -115,6 +116,7 @@ const Login = () => {
             // create_alert("success", "Account created successfully!");
             setEmail("");
             setPassword("");
+            // setSelectedRoomId(null); // 重設聊天室
             await createUser(email);
             // createChromeNotification();
             navigate("/chatroom");
@@ -129,6 +131,7 @@ const Login = () => {
     const handleGoogle = () => {
         console.log("Google gmail !");
         // console.log(email,password);
+        setSelectedRoomId(null); // 重設聊天室
         signInWithPopup(auth, new GoogleAuthProvider())
         .then(async (userCredential) => {
             createChromeNotification();

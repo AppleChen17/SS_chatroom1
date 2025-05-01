@@ -40,6 +40,7 @@ use these 3 commands
  npm start
  ```
 and the website would show up on your browser at `localhost:3000/`
+<br> Remember to use **`ctrl + 0`** to set the browser zoom at 100%
 
 ### How to use
 
@@ -52,17 +53,17 @@ If this is your first-time to log in, remember to use **New account** rather tha
 
     * Error Message
         <p>
-        <img style="margin-left: 0px;" src="./READMEsrc/login-error.png" width="400" height="200">
+        <img style="margin-left: 0px;" src="./READMEsrc/error-msg.png" width="400" height="200">
         </p>
 
     * Login
         <p>
-        <img style="margin-left: 0px;" src="./READMEsrc/login.png" width="400" height="200">
+        <img style="margin-left: 0px;" src="./READMEsrc/LOGIN2.png" width="400" height="200">
         </p>
     
     * Login animation
         <p>
-        <img style="margin-left: 0px;" src="./READMEsrc/gif/login-ani.gif" width="400" height="200">
+        <img style="margin-left: 0px;" src="./READMEsrc/gif/login2-ani.gif" width="400" height="200">
         </p>
     
 * **Chrome Notification Bell** : <br>
@@ -70,11 +71,11 @@ By pressing this bell button, the user could accept permission of chrome notific
 After agreeing, when login success, chrome could send notification to you.
     * Ask for permission
         <p>
-        <img style="margin-left: 0px;" src="./READMEsrc/permission.png" width="400" height="200">
+        <img style="margin-left: 0px;" src="./READMEsrc/ask_permission.png" width="400" height="200">
         </p>
     * Chrome nortification
         <p>
-        <img style="margin-left: 0px;" src="./READMEsrc/chrome-notification.png" width="400" height="200">
+        <img style="margin-left: 0px;" src="./READMEsrc/jump_chrome.png" width="400" height="200">
         </p>
 
 #### 2. Chatroom page
@@ -89,7 +90,7 @@ The user interface is divided into sections: the top of the page contains the na
 There is a CSS animation that made the text "# include &lt; chatroom &gt;" appear on the screen when switching page. (from login to chatroom or from chatroom to profile)
 
     <p>
-    <img style="margin-left: 0px;" src="./READMEsrc/gif/include_ani.gif" width="400" height="200">
+    <img style="margin-left: 0px;" src="./READMEsrc/gif/include2-ani.gif" width="400" height="200">
     </p>
 
 * **Dropdown menu** : <br>
@@ -105,7 +106,7 @@ In the upper-right corner of the Navbar, the user's email and profile photo are 
 
 ##### Function buttons
 <p>
-<img style="margin-left: 0px;" src="./READMEsrc/func-btns.png" width="35%" height="35%">
+<img style="margin-left: 0px;" src="./READMEsrc/func-btns2.png" width="35%" height="35%">
 </p>
 
 * **Add Chatroom** :
@@ -150,6 +151,10 @@ HAHA is an echo bot, it would repeat what you said.
 
     <!-- ![Chatbot demo](./READMEsrc/gif/chatbot.gif) -->
 
+* **Different Message Color** : <br>
+    <p>
+    <img style="margin-left: 0px;" src="./READMEsrc/msg-difference.png" width="400" height="200">
+    </p>
 
 #### 3. Profile page
 There are several fields that are editable and savable for the user.
