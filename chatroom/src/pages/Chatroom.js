@@ -22,11 +22,10 @@ const Chatroom = () => {
     }
 
     useEffect(() => {
-        if (selectedRoomId) {
-          getRoomName();
-        }
+        if (!selectedRoomId) return;
+        getRoomName();
       }, [selectedRoomId]);
-    
+
     return (
         // 靠著 flex 來控制解決了 ! 好像是因為像 Navbar 這種 component 的空間是不計算在裡面的，所以那樣條不行
         // 啊這樣設成 flex 讓底下自己解決就可以了 !

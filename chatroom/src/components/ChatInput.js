@@ -21,6 +21,7 @@ const ChatInput = () => {
     const [newMessage, setNewMessage] = useState('');
 
     useEffect(() => {
+      if (!selectedRoomId) return;
         console.log("selectedRoomId = ", selectedRoomId);
         const historyMessages = async () => {
             const messages = await loadMessage(selectedRoomId);

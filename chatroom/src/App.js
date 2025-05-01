@@ -29,12 +29,19 @@ function App() {
 
   // if (loading) return <div>Loading...</div>;
   // 這可能讓 Hook 沒機會執行到 => 會報錯 !!!!!!
+  // useEffect(() => {
+  //   if (!user && location.pathname !== "/") 
+  //   {
+  //     navigate("/");
+  //   }
+  // }, [user, location, navigate]);
   useEffect(() => {
-    if (!user && location.pathname !== "/") 
-    {
+    if (loading) return; // Wait until loading is done
+  
+    if (!user && location.pathname !== "/") {
       navigate("/");
     }
-  }, [user, location, navigate]);
+  }, [user, location, navigate, loading]);
 
   if (loading) return <div>Loading...</div>;
 

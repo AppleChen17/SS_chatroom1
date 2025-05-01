@@ -23,14 +23,14 @@ const Login = () => {
     const navigate = useNavigate();
     const { setSelectedRoomId } = useRoom();
 
-    useEffect(() => {
-      const unsubscribe = onAuthStateChanged(auth, (user) => {
-        console.log("Auth state changed:", user?.email);
-        setSelectedRoomId(null); // 每次登入狀態變化時重設聊天室
-      });
+    // useEffect(() => {
+    //   const unsubscribe = onAuthStateChanged(auth, (user) => {
+    //     // console.log("Auth state changed:", user?.email);
+    //     setSelectedRoomId(null); // 每次登入狀態變化時重設聊天室
+    //   });
   
-      return () => unsubscribe();
-    }, []);
+    //   return () => unsubscribe();
+    // }, []);
     // const { setSelectedRoomId } = useRoom(); // get the room id ! (is a HOOK !!!)
     // // setSelectedRoomId(null);
     // useEffect(() => {

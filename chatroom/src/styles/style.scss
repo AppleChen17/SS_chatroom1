@@ -5,8 +5,22 @@ $themeColor : rgb(251, 179, 153);
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+
+    // transform: scale(0.9); /* Scales down by 2/3 */
+    // transform-origin: top left; /* Keeps the scaling from the top-left corner */
     // background-color: antiquewhite;
     // overflow-y: hidden;
+}
+
+// html {
+//   zoom: 0.67; /* 強制設置縮放比例為 1 */
+// }
+html {
+  font-size: 16px; /* 設置根字體大小 */
+}
+html, body {
+  transform: none !important;
+  zoom: 1 !important;
 }
 
 h1,

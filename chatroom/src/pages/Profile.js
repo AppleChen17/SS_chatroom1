@@ -49,8 +49,9 @@ const Profile = () => {
   };
 
   useEffect(() => {
+    if (!auth.currentUser) return; // Wait for auth to be ready
+  
     const getAddr = async () => {
-
       const encodedEmail = encodeEmail(auth.currentUser.email);
       const userRef = ref(database, `users/${encodedEmail}`);
   
@@ -67,8 +68,7 @@ const Profile = () => {
     };
   
     getAddr();
-  }, []);
-  
+  }, [auth.currentUser]);
 
 
   const handleUpdate = async () => {
